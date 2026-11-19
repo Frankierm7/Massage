@@ -1,0 +1,25 @@
+<footer class="footer"><div class="wrap footer-grid">
+  <div><a class="brand" href="{{ routes.root_url }}" translate="no">DUSK ARBOR</a><p>{{ 'arbor.an_independent_authorized_retailer_of_real_relax_massage' | t }}</p></div>
+  <nav aria-label="{{ 'arbor.explore' | t | escape }}"><h2>{{ 'arbor.explore' | t }}</h2>{% render 'site-links', menu: section.settings.menu %}<a href="{{ routes.search_url }}">{{ 'arbor.search' | t }}</a></nav>
+  <nav aria-label="{{ 'arbor.customer_care' | t | escape }}"><h2>{{ 'arbor.customer_care' | t }}</h2>
+    {% if settings.contact_page != blank %}<a href="{{ settings.contact_page.url }}">{{ 'arbor.contact' | t }}</a>{% endif %}
+    {% if settings.fit_page != blank %}<a href="{{ settings.fit_page.url }}">{{ 'arbor.fit_delivery_guide' | t }}</a>{% endif %}
+    {% if settings.faq_page != blank %}<a href="{{ settings.faq_page.url }}">{{ 'arbor.faq' | t }}</a>{% endif %}
+    {% render 'policy-links' %}
+    {% if shop.privacy_policy.body != blank %}<a href="{{ shop.privacy_policy.url }}">{{ shop.privacy_policy.title | escape }}</a>{% endif %}
+    {% if shop.terms_of_service.body != blank %}<a href="{{ shop.terms_of_service.url }}">{{ shop.terms_of_service.title | escape }}</a>{% endif %}
+  </nav>
+</div></footer>
+
+{% schema %}
+{
+  "name": "Store footer",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Navigation menu"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,3 @@
+{% if shop.shipping_policy.body != blank %}<a href="{{ shop.shipping_policy.url }}">{{ shop.shipping_policy.title | escape }}</a>{% elsif settings.shipping_page != blank %}<a href="{{ settings.shipping_page.url }}">{{ settings.shipping_page.title | escape }}</a>{% endif %}
+{% if shop.refund_policy.body != blank %}<a href="{{ shop.refund_policy.url }}">{{ shop.refund_policy.title | escape }}</a>{% endif %}
+{% if settings.warranty_page != blank %}<a href="{{ settings.warranty_page.url }}">{{ settings.warranty_page.title | escape }}</a>{% endif %}

@@ -1,0 +1,7 @@
+{% assign description = photo.alt | default: label %}
+<a href="{{ photo | image_url: width: 2000 }}" data-thumb data-alt="{{ description | escape }}"
+   data-sizes="(min-width: 760px) 55vw, 100vw"
+   data-srcset="{{ photo | image_url: width: 480 }} 480w, {{ photo | image_url: width: 800 }} 800w, {{ photo | image_url: width: 1280 }} 1280w"
+   aria-label="View {{ description | escape }}" {% if active %}aria-current="true"{% endif %}>
+  {{ photo | image_url: width: 140 | image_tag: loading: 'lazy', alt: '' }}
+</a>

@@ -1,0 +1,9 @@
+{% assign facts = chair.metafields.chair %}
+<table class="dimensions"><caption>{{ 'arbor.chair_and_carton_measurements_in_inches' | t }}</caption>
+  <thead><tr><th scope="col">{{ 'arbor.position' | t }}</th><th scope="col">{{ 'arbor.depth' | t }}</th><th scope="col">{{ 'arbor.width' | t }}</th><th scope="col">{{ 'arbor.height' | t }}</th></tr></thead>
+  <tbody>{% assign positions = 'upright,reclined,carton' | split: ',' %}{% assign axes = 'depth,width,height' | split: ',' %}
+  {% for position in positions %}<tr><th scope="row">{{ position | capitalize }}</th>{% for axis in axes %}
+    {% assign key = position | append: '_' | append: axis %}<td>{{ facts[key].value | default: 'Ask us' | escape }}</td>
+  {% endfor %}</tr>{% endfor %}</tbody>
+</table>
+{% if facts.weight_lb.value %}<p>Chair weight: {{ facts.weight_lb.value }} lb</p>{% endif %}

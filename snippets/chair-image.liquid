@@ -1,0 +1,10 @@
+{% if image != blank %}
+  {% assign loading = 'lazy' %}
+  {% assign priority = 'auto' %}
+  {% if eager %}
+    {% assign loading = 'eager' %}
+    {% assign priority = 'high' %}
+  {% endif %}
+  {% assign description = image.alt | default: label %}
+  {{ image | image_url: width: 1600 | image_tag: widths: '160, 320, 480, 640, 800, 1000, 1280, 1600', sizes: sizes, loading: loading, fetchpriority: priority, alt: description }}
+{% endif %}

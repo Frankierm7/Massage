@@ -1,0 +1,19 @@
+<section class="wrap slab guidance"><div><h1>{{ page.title | escape }}</h1>{{ page.content }}</div><div>
+{% form 'contact', id: 'ContactForm' %}
+  {% if form.posted_successfully? %}<p role="status" tabindex="-1" data-result>{{ 'arbor.thank_you_dusk_arbor_has_received_your_message' | t }}</p>{% else %}
+    {% if form.errors %}<div role="alert" tabindex="-1" data-result>{{ form.errors | default_errors }}</div>{% endif %}
+    <label>{{ 'arbor.reason' | t }} <select name="contact[Reason]"><option>{{ 'arbor.choosing_a_chair' | t }}</option><option>{{ 'arbor.fit_and_delivery' | t }}</option><option>{{ 'arbor.order_question' | t }}</option><option>{{ 'arbor.returns_or_warranty' | t }}</option><option>{{ 'arbor.other' | t }}</option></select></label>
+    <label>{{ 'arbor.name' | t }} <input name="contact[name]" autocomplete="name" value="{{ form.name | default: customer.name | escape }}" required></label>
+    <label>{{ 'arbor.email' | t }} <input type="email" name="contact[email]" autocomplete="email" spellcheck="false" value="{{ form.email | default: customer.email | escape }}" required></label>
+    <label>{{ 'arbor.order_number_optional' | t }} <input name="contact[Order number]" autocomplete="off" value="{{ form['Order number'] | escape }}"></label>
+    <label>{{ 'arbor.message' | t }} <textarea name="contact[body]" rows="6" required data-inquiry>{{ form.body | escape }}</textarea></label>
+    <button class="button">{{ 'arbor.send_message' | t }} <span aria-hidden="true">→</span></button>
+  {% endif %}
+{% endform %}</div></section>
+
+{% schema %}
+{
+  "name": "Contact form",
+  "settings": []
+}
+{% endschema %}

@@ -1,0 +1,17 @@
+<article class="chair-card">
+  <a href="{{ chair.url }}" class="card-link">
+    {% assign photo = chair.selected_or_first_available_variant.featured_image | default: chair.featured_image %}
+    {% if photo %}
+      <div class="studio">{% render 'chair-image', image: photo, label: chair.title, sizes: '(min-width: 880px) 32vw, (min-width: 480px) 46vw, 90vw' %}</div>
+    {% endif %}
+    <div class="card-heading">
+      {% assign model = chair.metafields.chair.model.value | default: chair.title %}
+      {% if collection_heading %}<h2>{{ model | escape }}</h2>{% else %}<h3>{{ model | escape }}</h3>{% endif %}
+      <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 16 16 4M5 4h11v11"/></svg>
+    </div>
+  </a>
+  {% if chair.metafields.chair.highlight.value %}<p>{{ chair.metafields.chair.highlight.value | escape }}</p>{% endif %}
+  <div class="card-meta"><span>{% if chair.price_varies %}From {% endif %}{{ chair.price | money_with_currency }}</span>
+    {% unless chair.available %}<span>{{ 'arbor.sold_out' | t }}</span>{% endunless %}
+  </div>
+</article>

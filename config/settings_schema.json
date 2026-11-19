@@ -1,0 +1,65 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Dusk Arbor",
+    "theme_author": "Dusk Arbor",
+    "theme_version": "1.0.0",
+    "theme_documentation_url": "https://help.shopify.com/en/manual/online-store/themes",
+    "theme_support_url": "https://help.shopify.com/en/manual/online-store/themes"
+  },
+  {
+    "name": "Store resources",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Wordmark"
+      },
+      {
+        "type": "collection",
+        "id": "chairs",
+        "label": "Massage chair collection"
+      },
+      {
+        "type": "page",
+        "id": "compare_page",
+        "label": "Compare"
+      },
+      {
+        "type": "page",
+        "id": "fit_page",
+        "label": "Fit and delivery guide"
+      },
+      {
+        "type": "page",
+        "id": "about_page",
+        "label": "About"
+      },
+      {
+        "type": "page",
+        "id": "faq_page",
+        "label": "FAQ"
+      },
+      {
+        "type": "page",
+        "id": "contact_page",
+        "label": "Contact"
+      },
+      {
+        "type": "page",
+        "id": "shipping_page",
+        "label": "Approved shipping page"
+      },
+      {
+        "type": "page",
+        "id": "warranty_page",
+        "label": "Approved warranty page"
+      },
+      {
+        "type": "richtext",
+        "id": "policy_summary",
+        "label": "Approved delivery, returns and warranty summary"
+      }
+    ]
+  }
+]

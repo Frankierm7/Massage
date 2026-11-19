@@ -1,0 +1,29 @@
+<section class="wrap slab prose">
+  <h1>{{ page.title | escape }}</h1>
+  {% case template.suffix %}
+    {% when 'fit' %}
+      <h2>{{ 'arbor.measure_the_reclined_chair' | t }}</h2><p>{{ 'arbor.mark_the_fully_reclined_depth_and_width_on' | t }}</p>
+      <h2>{{ 'arbor.trace_the_delivery_route' | t }}</h2><p>{{ 'arbor.measure_each_doorway_hallway_landing_and_turn_include' | t }}</p>
+      {% assign lineup = settings.chairs | default: collections['massage-chairs'] %}
+      {% for chair in lineup.products limit: 3 %}<details><summary>{{ chair.metafields.chair.model.value | default: chair.title | escape }} measurements</summary>{% render 'chair-dimensions', chair: chair %}<a href="{{ chair.url }}">{{ 'arbor.view_chair' | t }}</a></details>{% endfor %}
+      <h2>{{ 'arbor.confirm_delivery_service' | t }}</h2><p>{{ 'arbor.ask_about_the_service_level_packaging_and_any' | t }}</p>
+    {% when 'about' %}
+      <p class="lead">{{ 'arbor.dusk_arbor_is_an_independent_authorized_retailer_of' | t }}</p>
+      <p>{{ 'arbor.we_select_chairs_by_their_reclined_footprint_massage' | t }}</p>
+      {% if settings.chairs != blank %}<a class="under" href="{{ settings.chairs.url }}">{{ 'arbor.explore_the_chairs' | t }}</a>{% endif %}
+    {% when 'faq' %}
+      <details><summary>{{ 'arbor.how_do_i_choose_between_the_chairs' | t }}</summary><p>{{ 'arbor.start_with_the_reclined_depth_then_compare_the' | t }}</p>{% if settings.compare_page != blank %}<a href="{{ settings.compare_page.url }}">{{ 'arbor.compare_chairs' | t }}</a>{% endif %}</details>
+      <details><summary>{{ 'arbor.which_measurements_matter_for_delivery' | t }}</summary><p>{{ 'arbor.measure_the_room_for_the_reclined_chair_and' | t }}</p>{% if settings.fit_page != blank %}<a href="{{ settings.fit_page.url }}">{{ 'arbor.fit_delivery_guide' | t }}</a>{% endif %}</details>
+      {% if settings.contact_page != blank %}<details><summary>{{ 'arbor.who_can_help_with_an_order_or_damage' | t }}</summary><p>{{ 'arbor.contact_dusk_arbor_with_your_model_and_order' | t }}</p><a href="{{ settings.contact_page.url }}">{{ 'arbor.contact_dusk_arbor' | t }}</a></details>{% endif %}
+      <div class="inline-links">{% render 'policy-links' %}</div>
+  {% endcase %}
+  {{ page.content }}
+  {% if settings.contact_page != blank %}<p><a class="under" href="{{ settings.contact_page.url }}">{{ 'arbor.ask_dusk_arbor' | t }}</a></p>{% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "Buying guide",
+  "settings": []
+}
+{% endschema %}

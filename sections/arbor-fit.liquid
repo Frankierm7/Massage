@@ -1,0 +1,18 @@
+{% if settings.fit_page != blank or settings.contact_page != blank %}
+<section class="wrap slab guidance"><h2>{{ 'arbor.make_room_for' | t }}<br><em>{{ 'arbor.the_recline' | t }}</em></h2><div>
+  <ol><li>{{ 'arbor.mark_out_the_chair_at_its_fully_reclined' | t }}</li><li>{{ 'arbor.measure_the_carton_against_doors_hallways_and_turns' | t }}</li><li>{{ 'arbor.check_wall_clearance_and_the_delivery_service_for' | t }}</li></ol>
+  <div class="actions">{% if settings.fit_page != blank %}<a class="under" href="{{ settings.fit_page.url }}">{{ 'arbor.check_your_room' | t }}</a>{% endif %}
+  {% if settings.contact_page != blank %}<a class="under" href="{{ settings.contact_page.url }}">{{ 'arbor.ask_about_delivery' | t }}</a>{% endif %}</div></div>
+</section>{% elsif request.design_mode %}<p class="wrap">{{ 'arbor.choose_a_fit_guide_or_contact_page_in' | t }}</p>{% endif %}
+
+{% schema %}
+{
+  "name": "Fit and delivery",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Fit and delivery"
+    }
+  ]
+}
+{% endschema %}

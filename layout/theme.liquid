@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+  <head>
+    {% render 'meta-tags' %}
+    <meta name="theme-color" content="#f6f2ea">
+    {{ 'instrument-serif-latin-400-normal.woff2' | asset_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous' }}
+    {{ 'arbor.css' | asset_url | stylesheet_tag }}
+    <script src="{{ 'arbor.js' | asset_url }}" defer></script>
+    {{ content_for_header }}
+  </head>
+  <body>
+    <a class="skip" href="#main">{{ 'arbor.skip_to_content' | t }}</a>
+    {% sections 'header-group' %}
+    <main id="main" tabindex="-1">{{ content_for_layout }}</main>
+    {% sections 'footer-group' %}
+  </body>
+</html>

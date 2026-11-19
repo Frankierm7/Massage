@@ -1,0 +1,30 @@
+{% assign lineup = section.settings.collection | default: settings.chairs | default: collections['massage-chairs'] %}
+{% if lineup.products.size > 0 %}
+<section class="wrap slab"><div class="section-head"><h2>{{ section.settings.heading | escape }}</h2><a class="under" href="{{ lineup.url }}">{{ 'arbor.view_all_chairs' | t }}</a></div>
+  <div class="cards">{% for chair in lineup.products limit: 3 %}{% render 'chair-card', chair: chair %}{% endfor %}</div>
+</section>
+{% elsif request.design_mode %}<p class="wrap">{{ 'arbor.select_a_collection_with_visible_products_for_the' | t }}</p>{% endif %}
+
+{% schema %}
+{
+  "name": "Chair collection",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "The chair collection"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Chair collection"
+    }
+  ]
+}
+{% endschema %}

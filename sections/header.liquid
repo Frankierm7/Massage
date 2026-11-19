@@ -1,0 +1,30 @@
+<header class="mast wrap">
+  <details class="mobile-menu">
+    <summary><span aria-hidden="true">☰</span> {{ 'arbor.menu' | t }}</summary>
+    <nav aria-label="{{ 'arbor.mobile_navigation' | t | escape }}">{% render 'site-links', menu: section.settings.menu %}
+      {% if settings.contact_page != blank %}<a href="{{ settings.contact_page.url }}">{{ 'arbor.help' | t }}</a>{% endif %}
+      <a href="{{ routes.search_url }}">{{ 'arbor.search' | t }}</a>
+    </nav>
+  </details>
+  <a class="brand" href="{{ routes.root_url }}" aria-label="{{ 'arbor.dusk_arbor_home' | t | escape }}" translate="no">
+    {% if settings.logo %}{{ settings.logo | image_url: width: 360 | image_tag: alt: 'Dusk Arbor' }}{% else %}DUSK ARBOR{% endif %}
+  </a>
+  <nav class="desktop-nav" aria-label="{{ 'arbor.shop' | t | escape }}">{% render 'site-links', menu: section.settings.menu %}</nav>
+  <nav class="utilities" aria-label="{{ 'arbor.help_and_bag' | t | escape }}">
+    {% if settings.contact_page != blank %}<a class="help-link" href="{{ settings.contact_page.url }}">{{ 'arbor.help' | t }}</a>{% endif %}
+    <a class="bag" href="{{ routes.cart_url }}"><svg aria-hidden="true" width="18" height="20" viewBox="0 0 20 22" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h14l1 13H2L3 7Z"/><path d="M7 8V5a3 3 0 0 1 6 0v3"/></svg> Bag ({{ cart.item_count }})</a>
+  </nav>
+</header>
+
+{% schema %}
+{
+  "name": "Store header",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Navigation menu"
+    }
+  ]
+}
+{% endschema %}

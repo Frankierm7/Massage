@@ -1,0 +1,59 @@
+{% liquid
+  assign chair = section.settings.chair | default: all_products['real-relax-ps5200']
+  assign finish = chair.variants | where: 'option1', 'Khaki' | first
+  assign room = finish.metafields.chair.gallery.value | first
+  assign photo = section.settings.image | default: room.preview_image
+  assign lineup = settings.chairs | default: collections['massage-chairs']
+  assign browse = section.settings.browse | default: lineup.url
+  assign compare = section.settings.compare | default: settings.compare_page.url
+%}
+<section class="hero wrap{% unless photo %} text-hero{% endunless %}">
+  <div class="hero-copy">
+    <h1>{% if section.settings.heading == 'A quieter evening.' %}{{ 'arbor.a_quieter' | t }} <br><em>{{ 'arbor.evening' | t }}</em>{% else %}{{ section.settings.heading | escape }}{% endif %}</h1>
+    <p>{% if lineup.products_count == 3 %}Explore three Real Relax massage chairs, selected for how they feel and how they fit your home.{% else %}Explore Real Relax massage chairs, selected for how they feel and how they fit your home.{% endif %}</p>
+    <div class="actions">{% if browse != blank %}<a class="button" href="{{ browse }}">{{ 'arbor.explore_the_chairs' | t }} <span aria-hidden="true">→</span></a>{% endif %}
+      {% if compare != blank %}<a class="under" href="{{ compare }}">{{ 'arbor.compare_chairs' | t }}</a>{% endif %}</div>
+  </div>
+  {% if photo %}<figure class="hero-photo">{% render 'chair-image', image: photo, label: chair.title, eager: true, sizes: '(min-width: 760px) 56vw, 100vw' %}
+    {% if finish and section.settings.image == blank %}<figcaption><a href="{{ finish.url }}">{{ chair.metafields.chair.model.value | default: chair.title | escape }} <span> / </span> {{ finish.option1 | escape }}</a></figcaption>{% endif %}
+  </figure>{% elsif request.design_mode %}<p>{{ 'arbor.choose_the_lead_photograph_or_assign_the_khaki' | t }}</p>{% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "Lead chair",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "A quieter evening."
+    },
+    {
+      "type": "product",
+      "id": "chair",
+      "label": "Featured chair"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Replace room photograph"
+    },
+    {
+      "type": "url",
+      "id": "browse",
+      "label": "Explore link override"
+    },
+    {
+      "type": "url",
+      "id": "compare",
+      "label": "Comparison link override"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Lead chair"
+    }
+  ]
+}
+{% endschema %}

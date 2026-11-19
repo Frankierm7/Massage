@@ -1,0 +1,20 @@
+{% assign hero = variant.featured_image %}
+{% assign gallery = variant.metafields.chair.gallery.value %}
+{% if hero or gallery != blank %}
+  {% assign first = gallery | first %}
+  {% assign primary = hero | default: first.preview_image %}
+  <div class="gallery" data-gallery>
+    <a class="gallery-main studio" href="{{ primary | image_url: width: 2000 }}" aria-label="Enlarge {{ variant.title | escape }} photograph">
+      {% render 'chair-image', image: primary, label: variant.title, sizes: '(min-width: 760px) 55vw, 100vw', eager: true %}
+      <span class="zoom-mark" aria-hidden="true">＋</span>
+    </a>
+    {% if gallery != blank %}<div class="thumbs" aria-label="{{ 'arbor.photographs' | t | escape }}">
+      {% if hero %}{% render 'gallery-thumb', photo: hero, active: true, label: variant.title %}{% endif %}
+      {% for media in gallery %}{% if media.preview_image %}
+        {% assign active = false %}{% if hero == blank and forloop.first %}{% assign active = true %}{% endif %}
+        {% render 'gallery-thumb', photo: media.preview_image, active: active, label: variant.title %}
+      {% endif %}{% endfor %}
+    </div>{% endif %}
+    <dialog aria-label="{{ 'arbor.enlarged_chair_photograph' | t | escape }}"><button type="button" data-close>{{ 'arbor.close' | t }}</button><div data-zoom></div></dialog>
+  </div>
+{% endif %}

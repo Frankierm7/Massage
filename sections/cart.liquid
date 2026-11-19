@@ -1,0 +1,33 @@
+<section class="wrap slab cart">
+  <h1>{{ 'arbor.your_bag' | t }}</h1><p role="status" hidden data-quantity-note>{{ 'arbor.quantity_adjusted_to_the_amount_available_review_your' | t }}</p>
+  {% if cart.item_count == 0 %}<p>{{ 'arbor.your_bag_is_empty' | t }}</p><a class="button" href="{{ settings.chairs.url | default: routes.all_products_collection_url }}">{{ 'arbor.explore_the_chairs' | t }}</a>
+  {% else %}
+    <ul class="cart-lines">{% for item in cart.items %}<li>
+      {% assign photo = item.variant.featured_image | default: item.image %}
+      {% if photo %}<a href="{{ item.url }}" aria-label="{{ item.product.title | escape }} in {{ item.variant.title | escape }}">{% render 'chair-image', image: photo, sizes: '144px', label: item.variant.title %}</a>{% endif %}
+      <div><h2><a href="{{ item.url }}">{{ item.product.title | escape }}</a></h2>
+      <p>{{ item.variant.title | escape }} · {{ item.final_price | money_with_currency }}</p>
+      {% for discount in item.line_level_discount_allocations %}<p>{{ discount.discount_application.title | escape }} (−{{ discount.amount | money }})</p>{% endfor %}
+      <form class="line-form" data-cart-url="{{ routes.cart_url }}" method="post" action="{{ routes.cart_change_url }}">
+        <input type="hidden" name="id" value="{{ item.key | escape }}">
+        <label>{{ 'arbor.quantity' | t }} <input name="quantity" type="number" min="0" step="1" value="{{ item.quantity }}" inputmode="numeric" required></label>
+        <button>{{ 'arbor.update' | t }}</button><a href="{{ item.url_to_remove }}">{{ 'arbor.remove' | t }}</a>
+        <p role="alert" class="form-error" tabindex="-1"></p>
+      </form></div><strong>{{ item.final_line_price | money_with_currency }}</strong>
+    </li>{% endfor %}</ul>
+    <div class="totals">
+      {% for discount in cart.cart_level_discount_applications %}<p>{{ discount.title | escape }} (−{{ discount.total_allocated_amount | money }})</p>{% endfor %}
+      <h2>{{ 'arbor.subtotal' | t }} <span>{{ cart.total_price | money_with_currency }}</span></h2>
+      <p>{{ 'arbor.review_delivery_options_and_applicable_taxes_at_checkout' | t }}</p>
+      <form action="{{ routes.cart_url }}" method="post"><button class="button" name="checkout">{{ 'arbor.checkout' | t }} <span aria-hidden="true">→</span></button></form>
+      {% if additional_checkout_buttons %}{{ content_for_additional_checkout_buttons }}{% endif %}
+    </div>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "Shopping bag",
+  "settings": []
+}
+{% endschema %}

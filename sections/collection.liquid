@@ -1,0 +1,33 @@
+<section class="wrap slab">
+  <div class="intro"><h1>{{ collection.title | escape }}</h1><p>{{ collection.description | strip_html | default: 'Compare the reclined footprint, controls and finishes of each chair.' | escape }}</p></div>
+  <form action="{{ collection.url }}" method="get" class="sort">
+    {% assign current_sort = collection.sort_by | default: collection.default_sort_by %}
+    <label>{{ 'arbor.sort_by' | t }} <select name="sort_by">
+      {% for opt in collection.sort_options %}{% if opt.value == 'manual' or opt.value contains 'price' or opt.value == current_sort %}
+        <option value="{{ opt.value }}" {% if opt.value == current_sort %}selected{% endif %}>{{ opt.name | escape }}</option>
+      {% endif %}{% endfor %}
+    </select></label>
+    {% for filter in collection.filters %}
+      {% if filter.type == 'boolean' or filter.type == 'list' %}
+        {% if filter.values.size > 1 %}<details><summary>{{ filter.label | escape }}</summary>
+          {% for value in filter.values %}<label><input type="checkbox" name="{{ value.param_name | escape }}" value="{{ value.value | escape }}" {% if value.active %}checked{% endif %}> {{ value.label | escape }} ({{ value.count }})</label>{% endfor %}
+        </details>{% else %}{% for value in filter.active_values %}<input type="hidden" name="{{ value.param_name | escape }}" value="{{ value.value | escape }}">{% endfor %}{% endif %}
+      {% elsif filter.type == 'price_range' %}
+        {% if filter.min_value.value != blank %}<input type="hidden" name="{{ filter.min_value.param_name }}" value="{{ filter.min_value.value | divided_by: 100.0 }}">{% endif %}
+        {% if filter.max_value.value != blank %}<input type="hidden" name="{{ filter.max_value.param_name }}" value="{{ filter.max_value.value | divided_by: 100.0 }}">{% endif %}
+      {% endif %}
+    {% endfor %}
+    <button>{{ 'arbor.apply' | t }}</button><a href="{{ collection.url }}">{{ 'arbor.reset' | t }}</a>
+  </form>
+  {% paginate collection.products by 24 %}
+    <div class="cards">{% for chair in collection.products %}{% render 'chair-card', chair: chair, collection_heading: true %}{% else %}<p>{{ 'arbor.no_chairs_match_this_selection' | t }}</p>{% endfor %}</div>
+    {% if paginate.pages > 1 %}{{ paginate | default_pagination }}{% endif %}
+  {% endpaginate %}
+</section>
+
+{% schema %}
+{
+  "name": "Chair collection page",
+  "settings": []
+}
+{% endschema %}

@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "main": {
+      "type": "arbor-guide",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

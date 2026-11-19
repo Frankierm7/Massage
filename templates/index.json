@@ -1,0 +1,31 @@
+{
+  "sections": {
+    "hero": {
+      "type": "arbor-hero",
+      "settings": {}
+    },
+    "lineup": {
+      "type": "arbor-lineup",
+      "settings": {}
+    },
+    "compare": {
+      "type": "arbor-compare",
+      "settings": {}
+    },
+    "flagship": {
+      "type": "arbor-flagship",
+      "settings": {}
+    },
+    "fit": {
+      "type": "arbor-fit",
+      "settings": {}
+    }
+  },
+  "order": [
+    "hero",
+    "lineup",
+    "compare",
+    "flagship",
+    "fit"
+  ]
+}

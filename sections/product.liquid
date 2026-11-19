@@ -1,0 +1,78 @@
+{% assign variant = product.selected_variant | default: product.selected_or_first_available_variant %}
+{% assign facts = product.metafields.chair %}
+{% assign lineup = settings.chairs | default: collections['massage-chairs'] %}
+<section class="wrap slab product">
+  {% if lineup != blank %}<a class="under crumb" href="{{ lineup.url }}">← {{ lineup.title | escape }}</a>{% endif %}
+  <div class="product-grid">
+    <div class="identity"><h1>{{ product.title | escape }}</h1>
+      <p class="price">{{ variant.price | money_with_currency }} {% if variant.compare_at_price > variant.price %}<s>{{ variant.compare_at_price | money_with_currency }}</s>{% endif %}</p>
+    </div>
+    {% render 'variant-gallery', variant: variant %}
+    <div class="buy">
+      {{ product.description }}
+      <p class="retailer">{{ 'arbor.sold_by_dusk_arbor_an_authorized_real_relax' | t }}</p>
+      <fieldset><legend>{{ 'arbor.finish' | t }} <strong>{{ variant.option1 | escape }}</strong></legend>
+        <div class="finishes">{% for choice in product.variants %}
+          <a href="{{ choice.url }}" {% if choice.id == variant.id %}aria-current="true"{% endif %}>
+            {% if choice.featured_image %}{{ choice.featured_image | image_url: width: 96 | image_tag: alt: '', loading: 'lazy' }}{% endif %}
+            {{ choice.option1 | escape }}
+          </a>
+        {% endfor %}</div>
+      </fieldset>
+      {% form 'product', product, class: 'buy-form', data-cart-url: routes.cart_url %}
+        <input type="hidden" name="id" value="{{ variant.id }}">
+        {% if variant.available %}
+          <p>{{ 'arbor.available' | t }}</p><label>{{ 'arbor.quantity' | t }} <input type="number" name="quantity" value="{{ variant.quantity_rule.min | default: 1 }}" min="{{ variant.quantity_rule.min | default: 1 }}" step="{{ variant.quantity_rule.increment | default: 1 }}" {% if variant.quantity_rule.max %}max="{{ variant.quantity_rule.max }}"{% endif %} inputmode="numeric" required></label>
+          <button class="button" type="submit">{{ 'arbor.add_to_bag' | t }} <span aria-hidden="true">→</span></button>
+        {% else %}<p>{{ 'arbor.this_finish_is_sold_out_choose_another_finish' | t }}</p><button class="button" disabled>{{ 'arbor.sold_out' | t }}</button>{% endif %}
+        <p role="alert" class="form-error" tabindex="-1"></p>{{ form.errors | default_errors }}
+      {% endform %}
+      <div class="inline-links">{% if settings.contact_page != blank %}<a href="{{ settings.contact_page.url }}?model={{ product.title | url_encode }}&amp;finish={{ variant.option1 | url_encode }}">{{ 'arbor.ask_about_this_chair' | t }}</a>{% endif %}{% render 'policy-links' %}</div>
+      {% for block in section.blocks %}{% render block %}{% endfor %}
+    </div>
+  </div>
+  <div class="product-detail" id="fit"><div><h2>{{ 'arbor.fit_in_your_room' | t }}</h2><p>{{ 'arbor.allow_space_behind_the_chair_to_recline_measure' | t }}</p>
+    {% if settings.fit_page != blank %}<a class="under" href="{{ settings.fit_page.url }}">{{ 'arbor.fit_delivery_guide' | t }}</a>{% endif %}</div>
+    <div>{% render 'chair-dimensions', chair: product %}{% if facts.manual.value != blank %}<a class="under" href="{{ facts.manual.value | escape }}">{{ 'arbor.read_the_manufacturer_s_manual_pdf' | t }}</a>{% endif %}</div>
+  </div>
+  {% if facts.features.value != blank %}
+  <div class="control-section">
+    <h2>{{ 'arbor.what_the_controls_do' | t }}</h2>
+    <div class="control-grid">
+      <article>
+        {% assign track_image = variant.metafields.chair.gallery.value[1] %}
+        {% if track_image.preview_image %}{% render 'chair-image', image: track_image.preview_image, label: product.title, sizes: '(min-width: 760px) 40vw, 100vw' %}{% endif %}
+        <h3>{{ 'arbor.roller_track' | t }}</h3>
+        <p>{{ facts.mechanism.value | escape }} · {{ facts.track.value | escape }}</p>
+        <ul>{% for feature in facts.features.value %}<li>{{ feature | escape }}</li>{% endfor %}</ul>
+      </article>
+      <article>
+        {% assign room_image = variant.metafields.chair.gallery.value | first %}
+        {% if room_image.preview_image %}{% render 'chair-image', image: room_image.preview_image, label: product.title, sizes: '(min-width: 760px) 40vw, 100vw' %}{% endif %}
+        <h3>{{ 'arbor.programs_and_adjustments' | t }}</h3>
+        <p>{{ facts.controls.value | escape }}</p>
+        {% if facts.programs.value %}<p>{{ 'arbor.automatic_program_count' | t: count: facts.programs.value }}</p>{% endif %}
+      </article>
+    </div>
+  </div>
+  <div class="product-detail"><h2>{{ 'arbor.setup_questions' | t }}</h2><div>
+    {% if facts.positions.value != blank %}<details><summary>{{ 'arbor.what_is_a_zero_gravity_position' | t }}</summary><p>{{ 'arbor.recline_count' | t: count: facts.positions.value }}</p></details>{% endif %}
+    {% if facts.power_w.value %}<details><summary>{{ 'arbor.what_power_supply_does_it_use' | t }}</summary><p>{{ facts.power_w.value }} W, {{ facts.supply.value | escape }}.</p></details>{% endif %}
+    <details><summary>{{ 'arbor.what_should_i_measure_before_delivery' | t }}</summary><p>{{ 'arbor.check_the_carton_width_and_height_against_the' | t }}</p><a href="#fit">{{ 'arbor.see_the_measurements' | t }}</a></details></div></div>{% endif %}
+  {% if settings.policy_summary != blank %}<div class="product-detail"><h2>{{ 'arbor.delivery_returns_and_warranty' | t }}</h2><div>{{ settings.policy_summary }}<div class="inline-links">{% render 'policy-links' %}</div></div></div>{% endif %}
+  {% if facts.alternative.value != blank or settings.compare_page != blank %}<div class="product-detail"><h2>{{ 'arbor.compare_your_options' | t }}</h2><div>
+    {% if facts.alternative.value != blank %}<a class="under" href="{{ facts.alternative.value.url }}">{{ facts.alternative.value.title | escape }}</a><p>{{ facts.alternative.value.metafields.chair.highlight.value | escape }}</p>{% endif %}
+    {% if settings.compare_page != blank %}<a class="under" href="{{ settings.compare_page.url }}">{{ 'arbor.compare_chairs' | t }}</a>{% endif %}</div></div>{% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "Product information",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "@app"
+    }
+  ]
+}
+{% endschema %}

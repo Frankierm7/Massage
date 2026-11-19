@@ -1,0 +1,43 @@
+{% liquid
+  assign chair = section.settings.chair | default: all_products['real-relax-ps6500']
+  assign finish = chair.variants | where: 'option1', 'Black' | first
+  assign room = finish.metafields.chair.gallery.value | first
+  assign photo = section.settings.image | default: room.preview_image
+%}
+{% if finish.available and photo %}
+<section class="feature"><div class="wrap feature-grid">
+  {% render 'chair-image', image: photo, label: chair.title, sizes: '(min-width: 760px) 50vw, 100vw' %}
+  <div><p class="model">{{ chair.metafields.chair.model.value | default: chair.title | escape }} / {{ finish.option1 | escape }}</p>
+    <h2>{{ section.settings.heading | escape }}</h2><p>{{ chair.description | strip_html | escape }}</p>
+    <a class="under" href="{{ finish.url }}">Explore {{ chair.metafields.chair.model.value | default: chair.title | escape }} <span aria-hidden="true">→</span></a>
+  </div></div></section>
+{% elsif request.design_mode %}<p class="wrap">{{ 'arbor.select_a_chair_with_an_available_black_finish' | t }}</p>{% endif %}
+
+{% schema %}
+{
+  "name": "Featured finish",
+  "settings": [
+    {
+      "type": "product",
+      "id": "chair",
+      "label": "Featured chair"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Replace room photograph"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "A routine you can return to."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured finish"
+    }
+  ]
+}
+{% endschema %}
