@@ -14,9 +14,9 @@
   {% assign first = gallery | first %}
   {% assign primary = hero | default: first.preview_image | default: first %}
   <div class="gallery" data-gallery>
-    {% if primary %}{% assign full_url = primary | image_url: width: 2000 %}{% else %}{% assign full_url = studio | asset_url %}{% endif %}
+    {% if primary != blank %}{% assign full_url = primary | image_url: width: 2000 %}{% else %}{% assign full_url = studio | asset_url %}{% endif %}
     <a class="gallery-main studio" href="{{ full_url | escape }}" aria-label="Enlarge {{ variant.title | escape }} photograph">
-      {% if primary %}
+      {% if primary != blank %}
         {% render 'chair-image', image: primary, label: variant.title, sizes: '(min-width: 760px) 55vw, 100vw', eager: true %}
       {% else %}
         <img src="{{ studio | asset_url }}" width="760" height="760" alt="{{ label | escape }}, studio view" fetchpriority="high">
