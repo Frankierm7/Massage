@@ -3,9 +3,10 @@
   {% if cart.item_count == 0 %}<p>{{ 'arbor.your_bag_is_empty' | t }}</p><a class="button" href="{{ settings.chairs.url | default: routes.all_products_collection_url }}">{{ 'arbor.explore_the_chairs' | t }}</a>
   {% else %}
     <ul class="cart-lines">{% for item in cart.items %}<li>
+      {% capture display_name %}{% render 'chair-name', chair: item.product, plain: true %}{% endcapture %}
       {% assign photo = item.variant.featured_image | default: item.image %}
-      {% if photo %}<a href="{{ item.url }}" aria-label="{{ item.product.title | escape }} in {{ item.variant.title | escape }}">{% render 'chair-image', image: photo, sizes: '144px', label: item.variant.title %}</a>{% endif %}
-      <div><h2><a href="{{ item.url }}">{{ item.product.title | escape }}</a></h2>
+      {% if photo %}<a href="{{ item.url }}" aria-label="{{ display_name | escape }} in {{ item.variant.title | escape }}">{% render 'chair-image', image: photo, sizes: '144px', label: item.variant.title %}</a>{% endif %}
+      <div><h2><a href="{{ item.url }}">{{ display_name | escape }}</a></h2>
       <p>{{ item.variant.title | escape }} · {{ item.final_price | money_with_currency }}</p>
       {% for discount in item.line_level_discount_allocations %}<p>{{ discount.discount_application.title | escape }} (−{{ discount.amount | money }})</p>{% endfor %}
       <form class="line-form" data-cart-url="{{ routes.cart_url }}" method="post" action="{{ routes.cart_change_url }}">

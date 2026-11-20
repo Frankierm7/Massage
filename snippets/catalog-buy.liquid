@@ -1,0 +1,7 @@
+{% if price_cents > 0 %}
+  <button class="button catalog-add" type="button" data-catalog-add data-product-key="{{ product_key | escape }}"
+    data-title="{{ title | strip | escape }}" data-price-cents="{{ price_cents }}" data-color="{{ color | escape }}">
+    Add to bag <span aria-hidden="true">→</span>
+  </button>
+{% endif %}
+<p class="catalog-availability">Currently unavailable to order. {% render 'contact-link' %}</p>

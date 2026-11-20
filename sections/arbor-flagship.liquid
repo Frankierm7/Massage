@@ -7,9 +7,9 @@
 {% if finish.available and photo %}
 <section class="feature"><div class="wrap feature-grid">
   {% render 'chair-image', image: photo, label: chair.title, sizes: '(min-width: 760px) 50vw, 100vw' %}
-  <div><p class="model">{{ chair.metafields.chair.model.value | default: chair.title | escape }} / {{ finish.option1 | escape }}</p>
-    <h2>{{ section.settings.heading | escape }}</h2><p>{{ chair.description | strip_html | escape }}</p>
-    <a class="under" href="{{ finish.url }}">Explore {{ chair.metafields.chair.model.value | default: chair.title | escape }} <span aria-hidden="true">→</span></a>
+  <div><p class="model">{% render 'chair-name', chair: chair %} / {{ finish.option1 | escape }}</p>
+    <h2>{{ section.settings.heading | escape }}</h2><p>{% capture overview %}{% render 'chair-copy', text: chair.description %}{% endcapture %}{{ overview | strip_html | escape }}</p>
+    <a class="under" href="{{ finish.url }}">Explore {% render 'chair-name', chair: chair %} <span aria-hidden="true">→</span></a>
   </div></div></section>
 {% elsif request.design_mode %}<p class="wrap">{{ 'arbor.select_a_chair_with_an_available_black_finish' | t }}</p>{% endif %}
 

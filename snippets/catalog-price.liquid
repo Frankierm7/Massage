@@ -1,0 +1,17 @@
+{%- comment -%}Catalog prices are US cents regardless of the Shopify market currency.{%- endcomment -%}
+{%- if cents > 0 -%}
+  {%- liquid
+    assign dollar_digits = cents | divided_by: 100 | floor | append: '' | split: ''
+    echo '$'
+    for digit in dollar_digits
+      assign group_boundary = forloop.rindex | modulo: 3
+      if group_boundary == 0 and forloop.first == false
+        echo ','
+      endif
+      echo digit
+    endfor
+    echo '.'
+    echo cents | modulo: 100 | prepend: '0' | slice: -2, 2
+    echo ' USD'
+  -%}
+{%- endif -%}

@@ -1,0 +1,75 @@
+{% liquid
+  assign item = block.settings
+  assign key = item.model | downcase
+  capture title
+    render 'chair-name', model: item.model
+  endcapture
+  assign title = title | strip
+  assign slug = title | handleize
+  assign colors = 'Khaki,Black' | split: ','
+  if key == 'ps6500'
+    assign colors = 'Black,Brown' | split: ','
+  endif
+  assign views = 'studio,lifestyle,track' | split: ','
+  assign view_labels = 'Studio,In a room,Roller track' | split: ','
+%}
+<article class="catalog-detail" id="product-{{ slug }}" data-detail-page data-catalog-product>
+  <a class="under" href="#chair-guide">← All chairs</a>
+  <div class="catalog-detail-grid">
+    <div class="catalog-detail-heading">
+      <h2 tabindex="-1" data-detail-heading>{{ title | escape }}</h2>
+      <p class="price">{% render 'catalog-price', cents: item.price_cents %}</p>
+    </div>
+    <div class="catalog-detail-gallery" aria-label="{{ title | escape }} photographs">
+      <div class="catalog-detail-photos">
+        {% for finish in colors %}
+          {% assign finish_number = forloop.index %}
+          {% assign stem = 'guide-' | append: key | append: '-' | append: finish | downcase %}
+          {% for view in views %}
+            {% assign width = 760 %}
+            {% if view == 'lifestyle' %}{% assign width = 720 %}{% elsif view == 'track' %}{% assign width = 900 %}{% endif %}
+            {% assign filename = stem | append: '-' | append: view | append: '-' | append: width | append: '.webp' %}
+            <img data-photo-finish="{{ finish_number }}" data-photo-view="{{ view }}"
+                src="{{ filename | asset_url }}" width="{{ width }}" height="{{ width }}" loading="lazy"
+                alt="{{ title | escape }} in {{ finish | escape }} — {{ view_labels[forloop.index0] }}">
+          {% endfor %}
+        {% endfor %}
+      </div>
+      <fieldset class="catalog-views">
+        <legend class="sr">Photograph</legend>
+        {% for view in views %}
+          <label><input type="radio" name="photo-{{ section_id }}-{{ block.id }}" value="{{ view }}" {% if forloop.first %}checked{% endif %}><span>{{ view_labels[forloop.index0] }}</span></label>
+        {% endfor %}
+      </fieldset>
+    </div>
+    <div class="catalog-detail-copy">
+      {% assign safe_overview = item.overview | escape %}<p>{% render 'chair-copy', text: safe_overview %}</p>
+      <fieldset class="guide-finish">
+        <legend>Finish</legend>
+        {% for finish in colors %}
+          <label>
+            <input type="radio" data-color="{{ finish | escape }}" name="detail-finish-{{ section_id }}-{{ block.id }}" value="{{ forloop.index }}" {% if forloop.first %}checked{% endif %}>
+            <span class="swatch swatch-{{ finish | downcase }}" aria-hidden="true"></span>{{ finish | escape }}
+          </label>
+        {% endfor %}
+      </fieldset>
+      {% render 'catalog-buy', product_key: key, title: title, price_cents: item.price_cents, color: colors.first %}
+
+    </div>
+  </div>
+  <div class="catalog-detail-specs">
+    <section><h3>Massage and controls</h3>
+      {% assign features = item.features | newline_to_br | split: '<br />' %}
+      <ul>{% for feature in features %}<li>{{ feature | strip | escape }}</li>{% endfor %}</ul>
+    </section>
+    <section><h3>Fit in your room</h3>
+      <table><caption>Depth × width × height</caption><tbody>
+        <tr><th scope="row">Upright</th><td>{{ item.upright | escape }}</td></tr>
+        <tr><th scope="row">Reclined</th><td>{{ item.reclined | escape }}</td></tr>
+        <tr><th scope="row">Carton</th><td>{{ item.carton | escape }}</td></tr>
+        {% if item.weight != blank %}<tr><th scope="row">Chair weight</th><td>{{ item.weight | escape }}</td></tr>{% endif %}
+      </tbody></table>
+      {% if item.manual != blank %}<a class="under" href="{{ item.manual | escape }}">Manufacturer’s manual (PDF)</a>{% endif %}
+    </section>
+  </div>
+</article>

@@ -1,0 +1,6 @@
+{% assign url = filename | asset_url %}
+<a href="{{ url | escape }}" data-thumb data-alt="{{ description | escape }}"
+   data-sizes="(min-width: 760px) 55vw, 100vw" data-srcset="{{ url | escape }} {{ width }}w"
+   aria-label="View {{ description | escape }}">
+  <img src="{{ filename | asset_url }}" width="{{ width }}" height="{{ width }}" loading="lazy" alt="">
+</a>

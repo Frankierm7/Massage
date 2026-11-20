@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html data-standalone="" lang="en">
 <head>
 <meta charset="utf-8"/>
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
@@ -19,7 +19,13 @@
 <meta content="#f6f2ea" name="theme-color"/>
 
 <link href="assets/arbor.css" rel="stylesheet"/>
+<link href="assets/catalog-cart.css" rel="stylesheet"/>
+<script defer="" src="assets/catalog-cart.js"></script>
 <script defer="" src="assets/arbor.js"></script>
+<link href="assets/product-detail.css" rel="stylesheet"/>
+<script defer="" src="assets/product-detail.js"></script>
+<link href="assets/standalone-contact.css" rel="stylesheet"/>
+<script defer="" src="assets/standalone-contact.js"></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -28,7 +34,8 @@
 <summary><span aria-hidden="true">☰</span> Menu</summary>
 <nav aria-label="Mobile navigation">
 <a href="#chair-guide">Chairs</a>
-
+<a href="#chair-comparison">Compare</a>
+<a data-contact-link="" href="#contact-us">Contact Us</a>
 </nav>
 </details>
 <a aria-label="Dusk Arbor home" class="brand" href="#main" translate="no">
@@ -36,8 +43,12 @@
   </a>
 <nav aria-label="Shop" class="desktop-nav">
 <a href="#chair-guide">Chairs</a>
+<a href="#chair-comparison">Compare</a>
 </nav>
-
+<nav aria-label="Help and bag" class="utilities">
+<a class="help-link" data-contact-link="" href="#contact-us">Contact Us</a>
+<a class="bag" href="#shopping-bag"><svg aria-hidden="true" fill="none" height="20" stroke="currentColor" stroke-width="1.5" viewbox="0 0 20 22" width="18"><path d="M3 7h14l1 13H2L3 7Z"></path><path d="M7 8V5a3 3 0 0 1 6 0v3"></path></svg> Bag (0)</a>
+</nav>
 </header>
 <main id="main" tabindex="-1">
 <section class="hero wrap">
@@ -45,43 +56,44 @@
 <h1>A quieter <br/><em>evening.</em></h1>
 <p>Explore Real Relax massage chairs, selected for how they feel and how they fit your home.</p>
 <div class="actions"><a class="button" href="#chair-guide">Explore the chairs <span aria-hidden="true">→</span></a>
-</div>
+<a class="under" href="#chair-comparison">Compare chairs</a></div>
 </div>
 <figure class="hero-photo">
-<img alt="Khaki Real Relax PS5200 massage chair in a furnished living room" fetchpriority="high" height="1280" sizes="(min-width: 760px) 56vw, 100vw" src="assets/guide-ps5200-khaki-lifestyle-1280.webp" srcset="assets/guide-ps5200-khaki-lifestyle-720.webp 720w, assets/guide-ps5200-khaki-lifestyle-1280.webp 1280w" width="1280"/>
-<figcaption><span class="guide-caption">PS5200 / Khaki</span></figcaption>
+<img alt="Linden massage chair in Khaki in a furnished living room" fetchpriority="high" height="1280" sizes="(min-width: 760px) 56vw, 100vw" src="assets/guide-ps5200-khaki-lifestyle-1280.webp" srcset="assets/guide-ps5200-khaki-lifestyle-720.webp 720w, assets/guide-ps5200-khaki-lifestyle-1280.webp 1280w" width="1280"/>
+<figcaption>
+<a href="#product-linden">Linden / Khaki</a>
+</figcaption>
 </figure>
 </section>
 <section class="wrap slab reference-guide" id="chair-guide">
 <div class="section-head"><h2>The chair collection</h2></div>
-<p class="guide-note">Real Relax manufacturer prices in USD, recorded November 19, 2026.</p>
 <div class="cards">
-<article class="guide-card" id="chair-favor-27">
-<div class="studio guide-photos">
-<img alt="Real Relax Favor-27 in khaki, three-quarter studio view" data-finish="1" height="760" loading="lazy" sizes="(min-width: 880px) 32vw, (min-width: 480px) 46vw, 90vw" src="assets/guide-favor-27-khaki-studio-760.webp" srcset="assets/guide-favor-27-khaki-studio-380.webp 380w, assets/guide-favor-27-khaki-studio-760.webp 760w" width="760"/>
-<img alt="Real Relax Favor-27 in black, three-quarter studio view" data-finish="2" height="760" loading="lazy" sizes="(min-width: 880px) 32vw, (min-width: 480px) 46vw, 90vw" src="assets/guide-favor-27-black-studio-760.webp" srcset="assets/guide-favor-27-black-studio-380.webp 380w, assets/guide-favor-27-black-studio-760.webp 760w" width="760"/>
-</div>
+<article class="guide-card" data-catalog-product="" id="chair-favor-27">
+<a aria-label="View Alder massage chair" class="studio guide-photos" data-detail-link="" href="#product-alder">
+<img alt="Alder in khaki, three-quarter studio view" data-finish="1" height="760" loading="lazy" sizes="(min-width: 880px) 32vw, (min-width: 480px) 46vw, 90vw" src="assets/guide-favor-27-khaki-studio-760.webp" srcset="assets/guide-favor-27-khaki-studio-380.webp 380w, assets/guide-favor-27-khaki-studio-760.webp 760w" width="760"/>
+<img alt="Alder in black, three-quarter studio view" data-finish="2" height="760" loading="lazy" sizes="(min-width: 880px) 32vw, (min-width: 480px) 46vw, 90vw" src="assets/guide-favor-27-black-studio-760.webp" srcset="assets/guide-favor-27-black-studio-380.webp 380w, assets/guide-favor-27-black-studio-760.webp 760w" width="760"/>
+</a>
 <div class="guide-identity">
-<h3>Favor-27</h3>
-<p class="guide-price">$1,149.99 <span>USD</span></p>
+<h3><a data-detail-link="" href="#product-alder">Alder</a></h3>
+<p class="guide-price">$1,264.99 USD</p>
 </div>
 <fieldset class="guide-finish"><legend>Finish</legend>
 <label>
-<input checked="" name="finish-arbor-lineup-guide_favor_27" type="radio" value="1"/>
+<input checked="" data-color="Khaki" name="finish-arbor-lineup-guide_favor_27" type="radio" value="1"/>
 <span aria-hidden="true" class="swatch swatch-khaki"></span>
         Khaki
       </label>
 <label>
-<input name="finish-arbor-lineup-guide_favor_27" type="radio" value="2"/>
+<input data-color="Black" name="finish-arbor-lineup-guide_favor_27" type="radio" value="2"/>
 <span aria-hidden="true" class="swatch swatch-black"></span>
         Black
       </label>
 </fieldset>
-<p>Choose a program on the seven-inch screen, then settle into one of two recline positions. The rollers follow an SL track from neck to hips. Of the three chairs in this edit, the Favor-27 takes up the least depth when fully reclined.</p>
+<p>Choose a program on the seven-inch screen, then settle into one of two recline positions. The rollers follow an SL track from neck to hips. Of the three chairs in this edit, Alder takes up the least depth when fully reclined.</p>
 <details class="guide-specs">
 <summary>Features &amp; measurements</summary>
-<img alt="Real Relax Favor-27 in khaki in a furnished room" data-finish="1" height="720" loading="lazy" src="assets/guide-favor-27-khaki-lifestyle-720.webp" width="720"/>
-<img alt="Real Relax Favor-27 in black in a furnished room" data-finish="2" height="720" loading="lazy" src="assets/guide-favor-27-black-lifestyle-720.webp" width="720"/>
+<img alt="Alder in khaki in a furnished room" data-finish="1" height="720" loading="lazy" src="assets/guide-favor-27-khaki-lifestyle-720.webp" width="720"/>
+<img alt="Alder in black in a furnished room" data-finish="2" height="720" loading="lazy" src="assets/guide-favor-27-black-lifestyle-720.webp" width="720"/>
 <ul><li>3D rollers on an SL track</li><li>16 automatic programs</li><li>Two zero-gravity positions</li><li>7-inch touchscreen</li><li>Lumbar heat</li><li>26 air cells</li><li>Foot rollers and extendable footrest</li><li>Bluetooth audio and USB charging</li></ul>
 <table><caption>Depth × width × height</caption><tbody>
 <tr><th scope="row">Upright</th><td>57.1 × 29.1 × 42.1 in</td></tr>
@@ -90,35 +102,40 @@
 </tbody></table>
 <a class="under" href="https://cdn.shopify.com/s/files/1/0665/9493/0917/files/real_relax_Favor-27_user_manual.pdf?v=1789122158">Manufacturer’s manual (PDF)</a>
 </details>
-<a class="under guide-source" data-finish="1" href="https://realrelaxmall.com/products/favor-27-massage-chair-khaki">View at Real Relax</a>
-<a class="under guide-source" data-finish="2" href="https://realrelaxmall.com/products/favor-27-massage-chair-black">View at Real Relax</a>
+<button class="button catalog-add" data-catalog-add="" data-color="Khaki" data-price-cents="126499" data-product-key="favor-27" data-title="Alder" type="button">
+    Add to bag <span aria-hidden="true">→</span>
+</button>
+<p class="catalog-availability">Currently unavailable to order.
+
+<a data-contact-link="" href="#contact-us">Contact Us</a>
+</p>
 </article>
-<article class="guide-card" id="chair-ps5200">
-<div class="studio guide-photos">
-<img alt="Real Relax PS5200 in khaki, three-quarter studio view" data-finish="1" height="760" loading="lazy" sizes="(min-width: 880px) 32vw, (min-width: 480px) 46vw, 90vw" src="assets/guide-ps5200-khaki-studio-760.webp" srcset="assets/guide-ps5200-khaki-studio-380.webp 380w, assets/guide-ps5200-khaki-studio-760.webp 760w" width="760"/>
-<img alt="Real Relax PS5200 in black, three-quarter studio view" data-finish="2" height="760" loading="lazy" sizes="(min-width: 880px) 32vw, (min-width: 480px) 46vw, 90vw" src="assets/guide-ps5200-black-studio-760.webp" srcset="assets/guide-ps5200-black-studio-380.webp 380w, assets/guide-ps5200-black-studio-760.webp 760w" width="760"/>
-</div>
+<article class="guide-card" data-catalog-product="" id="chair-ps5200">
+<a aria-label="View Linden massage chair" class="studio guide-photos" data-detail-link="" href="#product-linden">
+<img alt="Linden in khaki, three-quarter studio view" data-finish="1" height="760" loading="lazy" sizes="(min-width: 880px) 32vw, (min-width: 480px) 46vw, 90vw" src="assets/guide-ps5200-khaki-studio-760.webp" srcset="assets/guide-ps5200-khaki-studio-380.webp 380w, assets/guide-ps5200-khaki-studio-760.webp 760w" width="760"/>
+<img alt="Linden in black, three-quarter studio view" data-finish="2" height="760" loading="lazy" sizes="(min-width: 880px) 32vw, (min-width: 480px) 46vw, 90vw" src="assets/guide-ps5200-black-studio-760.webp" srcset="assets/guide-ps5200-black-studio-380.webp 380w, assets/guide-ps5200-black-studio-760.webp 760w" width="760"/>
+</a>
 <div class="guide-identity">
-<h3>PS5200</h3>
-<p class="guide-price">$1,599.99 <span>USD</span></p>
+<h3><a data-detail-link="" href="#product-linden">Linden</a></h3>
+<p class="guide-price">$1,759.99 USD</p>
 </div>
 <fieldset class="guide-finish"><legend>Finish</legend>
 <label>
-<input checked="" name="finish-arbor-lineup-guide_ps5200" type="radio" value="1"/>
+<input checked="" data-color="Khaki" name="finish-arbor-lineup-guide_ps5200" type="radio" value="1"/>
 <span aria-hidden="true" class="swatch swatch-khaki"></span>
         Khaki
       </label>
 <label>
-<input name="finish-arbor-lineup-guide_ps5200" type="radio" value="2"/>
+<input data-color="Black" name="finish-arbor-lineup-guide_ps5200" type="radio" value="2"/>
 <span aria-hidden="true" class="swatch swatch-black"></span>
         Black
       </label>
 </fieldset>
-<p>The PS5200 gives you separate control over roller intensity and air pressure, each with five settings. Choose from 20 automatic programs, add lower-back warmth, or use the foot rollers while you recline.</p>
+<p>Linden gives you separate control over roller intensity and air pressure, each with five settings. Choose from 20 automatic programs, add lower-back warmth, or use the foot rollers while you recline.</p>
 <details class="guide-specs">
 <summary>Features &amp; measurements</summary>
-<img alt="Real Relax PS5200 in khaki in a furnished room" data-finish="1" height="720" loading="lazy" src="assets/guide-ps5200-khaki-lifestyle-720.webp" width="720"/>
-<img alt="Real Relax PS5200 in black in a furnished room" data-finish="2" height="720" loading="lazy" src="assets/guide-ps5200-black-lifestyle-720.webp" width="720"/>
+<img alt="Linden in khaki in a furnished room" data-finish="1" height="720" loading="lazy" src="assets/guide-ps5200-khaki-lifestyle-720.webp" width="720"/>
+<img alt="Linden in black in a furnished room" data-finish="2" height="720" loading="lazy" src="assets/guide-ps5200-black-lifestyle-720.webp" width="720"/>
 <ul><li>4D rollers on an SL track</li><li>20 automatic programs</li><li>Two zero-gravity positions</li><li>Five roller intensity levels and five air pressure levels</li><li>30 air cells</li><li>Shoulder detection</li><li>Lumbar heat and foot rollers</li><li>Touch controls and wireless charging</li></ul>
 <table><caption>Depth × width × height</caption><tbody>
 <tr><th scope="row">Upright</th><td>57.5 × 29.1 × 44.5 in</td></tr>
@@ -128,35 +145,40 @@
 </tbody></table>
 <a class="under" href="https://cdn.shopify.com/s/files/1/0665/9493/0917/files/real_relax_PS5200_user_manual.pdf?v=1755509321">Manufacturer’s manual (PDF)</a>
 </details>
-<a class="under guide-source" data-finish="1" href="https://realrelaxmall.com/products/ps5200-massage-chair-khaki">View at Real Relax</a>
-<a class="under guide-source" data-finish="2" href="https://realrelaxmall.com/products/ps5200-massage-chair-black">View at Real Relax</a>
+<button class="button catalog-add" data-catalog-add="" data-color="Khaki" data-price-cents="175999" data-product-key="ps5200" data-title="Linden" type="button">
+    Add to bag <span aria-hidden="true">→</span>
+</button>
+<p class="catalog-availability">Currently unavailable to order.
+
+<a data-contact-link="" href="#contact-us">Contact Us</a>
+</p>
 </article>
-<article class="guide-card" id="chair-ps6500">
-<div class="studio guide-photos">
-<img alt="Real Relax PS6500 in black, three-quarter studio view" data-finish="1" height="760" loading="lazy" sizes="(min-width: 880px) 32vw, (min-width: 480px) 46vw, 90vw" src="assets/guide-ps6500-black-studio-760.webp" srcset="assets/guide-ps6500-black-studio-380.webp 380w, assets/guide-ps6500-black-studio-760.webp 760w" width="760"/>
-<img alt="Real Relax PS6500 in brown, three-quarter studio view" data-finish="2" height="760" loading="lazy" sizes="(min-width: 880px) 32vw, (min-width: 480px) 46vw, 90vw" src="assets/guide-ps6500-brown-studio-760.webp" srcset="assets/guide-ps6500-brown-studio-380.webp 380w, assets/guide-ps6500-brown-studio-760.webp 760w" width="760"/>
-</div>
+<article class="guide-card" data-catalog-product="" id="chair-ps6500">
+<a aria-label="View Sequoia massage chair" class="studio guide-photos" data-detail-link="" href="#product-sequoia">
+<img alt="Sequoia in black, three-quarter studio view" data-finish="1" height="760" loading="lazy" sizes="(min-width: 880px) 32vw, (min-width: 480px) 46vw, 90vw" src="assets/guide-ps6500-black-studio-760.webp" srcset="assets/guide-ps6500-black-studio-380.webp 380w, assets/guide-ps6500-black-studio-760.webp 760w" width="760"/>
+<img alt="Sequoia in brown, three-quarter studio view" data-finish="2" height="760" loading="lazy" sizes="(min-width: 880px) 32vw, (min-width: 480px) 46vw, 90vw" src="assets/guide-ps6500-brown-studio-760.webp" srcset="assets/guide-ps6500-brown-studio-380.webp 380w, assets/guide-ps6500-brown-studio-760.webp 760w" width="760"/>
+</a>
 <div class="guide-identity">
-<h3>PS6500</h3>
-<p class="guide-price">$2,299.99 <span>USD</span></p>
+<h3><a data-detail-link="" href="#product-sequoia">Sequoia</a></h3>
+<p class="guide-price">$2,529.99 USD</p>
 </div>
 <fieldset class="guide-finish"><legend>Finish</legend>
 <label>
-<input checked="" name="finish-arbor-lineup-guide_ps6500" type="radio" value="1"/>
+<input checked="" data-color="Black" name="finish-arbor-lineup-guide_ps6500" type="radio" value="1"/>
 <span aria-hidden="true" class="swatch swatch-black"></span>
         Black
       </label>
 <label>
-<input name="finish-arbor-lineup-guide_ps6500" type="radio" value="2"/>
+<input data-color="Brown" name="finish-arbor-lineup-guide_ps6500" type="radio" value="2"/>
 <span aria-hidden="true" class="swatch swatch-brown"></span>
         Brown
       </label>
 </fieldset>
-<p>The PS6500 pairs a long 4D roller track with three recline positions. Save a favorite routine, change supported settings by voice, and choose from 25 ambient sounds. Allow 74.02 inches for the reclined chair itself, plus the clearance required for placement.</p>
+<p>Sequoia pairs a long 4D roller track with three recline positions. Save a favorite routine, change supported settings by voice, and choose from 25 ambient sounds. Allow 74.02 inches for the reclined chair itself, plus the clearance required for placement.</p>
 <details class="guide-specs">
 <summary>Features &amp; measurements</summary>
-<img alt="Real Relax PS6500 in black in a furnished room" data-finish="1" height="720" loading="lazy" src="assets/guide-ps6500-black-lifestyle-720.webp" width="720"/>
-<img alt="Real Relax PS6500 in brown in a furnished room" data-finish="2" height="720" loading="lazy" src="assets/guide-ps6500-brown-lifestyle-720.webp" width="720"/>
+<img alt="Sequoia in black in a furnished room" data-finish="1" height="720" loading="lazy" src="assets/guide-ps6500-black-lifestyle-720.webp" width="720"/>
+<img alt="Sequoia in brown in a furnished room" data-finish="2" height="720" loading="lazy" src="assets/guide-ps6500-brown-lifestyle-720.webp" width="720"/>
 <ul><li>4D rollers on a long SL track</li><li>27 automatic programs</li><li>Three zero-gravity positions</li><li>7-inch touchscreen and voice control</li><li>Favorite settings</li><li>28 air cells</li><li>Lumbar heat and foot rollers</li><li>25 ambient sounds</li><li>Bluetooth audio and wireless charging</li></ul>
 <table><caption>Depth × width × height</caption><tbody>
 <tr><th scope="row">Upright</th><td>61.81 × 30.71 × 48.82 in</td></tr>
@@ -166,18 +188,367 @@
 </tbody></table>
 <a class="under" href="https://cdn.shopify.com/s/files/1/0023/2525/0115/files/PS6500__20230516-__compressed.pdf?v=1760938058">Manufacturer’s manual (PDF)</a>
 </details>
-<a class="under guide-source" data-finish="1" href="https://realrelaxmall.com/products/ps6500-4d-massage-chair-black">View at Real Relax</a>
-<a class="under guide-source" data-finish="2" href="https://realrelaxmall.com/products/real-relax%C2%AE-ps6500-massage-chair">View at Real Relax</a>
+<button class="button catalog-add" data-catalog-add="" data-color="Black" data-price-cents="252999" data-product-key="ps6500" data-title="Sequoia" type="button">
+    Add to bag <span aria-hidden="true">→</span>
+</button>
+<p class="catalog-availability">Currently unavailable to order.
+
+<a data-contact-link="" href="#contact-us">Contact Us</a>
+</p>
 </article>
 </div>
+<div class="catalog-details">
+<article class="catalog-detail" data-catalog-product="" data-detail-page="" id="product-alder">
+<a class="under" href="#chair-guide">← All chairs</a>
+<div class="catalog-detail-grid">
+<div class="catalog-detail-heading">
+<h2 data-detail-heading="" tabindex="-1">Alder</h2>
+<p class="price">$1,264.99 USD</p>
+</div>
+<div aria-label="Alder photographs" class="catalog-detail-gallery">
+<div class="catalog-detail-photos">
+<img alt="Alder in Khaki — Studio" data-photo-finish="1" data-photo-view="studio" height="760" loading="lazy" src="assets/guide-favor-27-khaki-studio-760.webp" width="760"/>
+<img alt="Alder in Khaki — In a room" data-photo-finish="1" data-photo-view="lifestyle" height="720" loading="lazy" src="assets/guide-favor-27-khaki-lifestyle-720.webp" width="720"/>
+<img alt="Alder in Khaki — Roller track" data-photo-finish="1" data-photo-view="track" height="900" loading="lazy" src="assets/guide-favor-27-khaki-track-900.webp" width="900"/>
+<img alt="Alder in Black — Studio" data-photo-finish="2" data-photo-view="studio" height="760" loading="lazy" src="assets/guide-favor-27-black-studio-760.webp" width="760"/>
+<img alt="Alder in Black — In a room" data-photo-finish="2" data-photo-view="lifestyle" height="720" loading="lazy" src="assets/guide-favor-27-black-lifestyle-720.webp" width="720"/>
+<img alt="Alder in Black — Roller track" data-photo-finish="2" data-photo-view="track" height="900" loading="lazy" src="assets/guide-favor-27-black-track-900.webp" width="900"/>
+</div>
+<fieldset class="catalog-views">
+<legend class="sr">Photograph</legend>
+<label><input checked="" name="photo-arbor-lineup-guide_favor_27" type="radio" value="studio"/><span>Studio</span></label>
+<label><input name="photo-arbor-lineup-guide_favor_27" type="radio" value="lifestyle"/><span>In a room</span></label>
+<label><input name="photo-arbor-lineup-guide_favor_27" type="radio" value="track"/><span>Roller track</span></label>
+</fieldset>
+</div>
+<div class="catalog-detail-copy">
+<p>Choose a program on the seven-inch screen, then settle into one of two recline positions. The rollers follow an SL track from neck to hips. Of the three chairs in this edit, Alder takes up the least depth when fully reclined.</p>
+<fieldset class="guide-finish">
+<legend>Finish</legend>
+<label>
+<input checked="" data-color="Khaki" name="detail-finish-arbor-lineup-guide_favor_27" type="radio" value="1"/>
+<span aria-hidden="true" class="swatch swatch-khaki"></span>Khaki
+          </label>
+<label>
+<input data-color="Black" name="detail-finish-arbor-lineup-guide_favor_27" type="radio" value="2"/>
+<span aria-hidden="true" class="swatch swatch-black"></span>Black
+          </label>
+</fieldset>
+<button class="button catalog-add" data-catalog-add="" data-color="Khaki" data-price-cents="126499" data-product-key="favor-27" data-title="Alder" type="button">
+    Add to bag <span aria-hidden="true">→</span>
+</button>
+<p class="catalog-availability">Currently unavailable to order.
+
+<a data-contact-link="" href="#contact-us">Contact Us</a>
+</p>
+</div>
+</div>
+<div class="catalog-detail-specs">
+<section><h3>Massage and controls</h3>
+<ul><li>3D rollers on an SL track</li><li>16 automatic programs</li><li>Two zero-gravity positions</li><li>7-inch touchscreen</li><li>Lumbar heat</li><li>26 air cells</li><li>Foot rollers and extendable footrest</li><li>Bluetooth audio and USB charging</li></ul>
+</section>
+<section><h3>Fit in your room</h3>
+<table><caption>Depth × width × height</caption><tbody>
+<tr><th scope="row">Upright</th><td>57.1 × 29.1 × 42.1 in</td></tr>
+<tr><th scope="row">Reclined</th><td>66.1 × 29.1 × 35.4 in</td></tr>
+<tr><th scope="row">Carton</th><td>46.5 × 29.5 × 43.7 in</td></tr>
+</tbody></table>
+<a class="under" href="https://cdn.shopify.com/s/files/1/0665/9493/0917/files/real_relax_Favor-27_user_manual.pdf?v=1789122158">Manufacturer’s manual (PDF)</a>
+</section>
+</div>
+</article>
+<article class="catalog-detail" data-catalog-product="" data-detail-page="" id="product-linden">
+<a class="under" href="#chair-guide">← All chairs</a>
+<div class="catalog-detail-grid">
+<div class="catalog-detail-heading">
+<h2 data-detail-heading="" tabindex="-1">Linden</h2>
+<p class="price">$1,759.99 USD</p>
+</div>
+<div aria-label="Linden photographs" class="catalog-detail-gallery">
+<div class="catalog-detail-photos">
+<img alt="Linden in Khaki — Studio" data-photo-finish="1" data-photo-view="studio" height="760" loading="lazy" src="assets/guide-ps5200-khaki-studio-760.webp" width="760"/>
+<img alt="Linden in Khaki — In a room" data-photo-finish="1" data-photo-view="lifestyle" height="720" loading="lazy" src="assets/guide-ps5200-khaki-lifestyle-720.webp" width="720"/>
+<img alt="Linden in Khaki — Roller track" data-photo-finish="1" data-photo-view="track" height="900" loading="lazy" src="assets/guide-ps5200-khaki-track-900.webp" width="900"/>
+<img alt="Linden in Black — Studio" data-photo-finish="2" data-photo-view="studio" height="760" loading="lazy" src="assets/guide-ps5200-black-studio-760.webp" width="760"/>
+<img alt="Linden in Black — In a room" data-photo-finish="2" data-photo-view="lifestyle" height="720" loading="lazy" src="assets/guide-ps5200-black-lifestyle-720.webp" width="720"/>
+<img alt="Linden in Black — Roller track" data-photo-finish="2" data-photo-view="track" height="900" loading="lazy" src="assets/guide-ps5200-black-track-900.webp" width="900"/>
+</div>
+<fieldset class="catalog-views">
+<legend class="sr">Photograph</legend>
+<label><input checked="" name="photo-arbor-lineup-guide_ps5200" type="radio" value="studio"/><span>Studio</span></label>
+<label><input name="photo-arbor-lineup-guide_ps5200" type="radio" value="lifestyle"/><span>In a room</span></label>
+<label><input name="photo-arbor-lineup-guide_ps5200" type="radio" value="track"/><span>Roller track</span></label>
+</fieldset>
+</div>
+<div class="catalog-detail-copy">
+<p>Linden gives you separate control over roller intensity and air pressure, each with five settings. Choose from 20 automatic programs, add lower-back warmth, or use the foot rollers while you recline.</p>
+<fieldset class="guide-finish">
+<legend>Finish</legend>
+<label>
+<input checked="" data-color="Khaki" name="detail-finish-arbor-lineup-guide_ps5200" type="radio" value="1"/>
+<span aria-hidden="true" class="swatch swatch-khaki"></span>Khaki
+          </label>
+<label>
+<input data-color="Black" name="detail-finish-arbor-lineup-guide_ps5200" type="radio" value="2"/>
+<span aria-hidden="true" class="swatch swatch-black"></span>Black
+          </label>
+</fieldset>
+<button class="button catalog-add" data-catalog-add="" data-color="Khaki" data-price-cents="175999" data-product-key="ps5200" data-title="Linden" type="button">
+    Add to bag <span aria-hidden="true">→</span>
+</button>
+<p class="catalog-availability">Currently unavailable to order.
+
+<a data-contact-link="" href="#contact-us">Contact Us</a>
+</p>
+</div>
+</div>
+<div class="catalog-detail-specs">
+<section><h3>Massage and controls</h3>
+<ul><li>4D rollers on an SL track</li><li>20 automatic programs</li><li>Two zero-gravity positions</li><li>Five roller intensity levels and five air pressure levels</li><li>30 air cells</li><li>Shoulder detection</li><li>Lumbar heat and foot rollers</li><li>Touch controls and wireless charging</li></ul>
+</section>
+<section><h3>Fit in your room</h3>
+<table><caption>Depth × width × height</caption><tbody>
+<tr><th scope="row">Upright</th><td>57.5 × 29.1 × 44.5 in</td></tr>
+<tr><th scope="row">Reclined</th><td>70.1 × 29.1 × 38.6 in</td></tr>
+<tr><th scope="row">Carton</th><td>50.4 × 29.9 × 47.2 in</td></tr>
+<tr><th scope="row">Chair weight</th><td>174.2 lb</td></tr>
+</tbody></table>
+<a class="under" href="https://cdn.shopify.com/s/files/1/0665/9493/0917/files/real_relax_PS5200_user_manual.pdf?v=1755509321">Manufacturer’s manual (PDF)</a>
+</section>
+</div>
+</article>
+<article class="catalog-detail" data-catalog-product="" data-detail-page="" id="product-sequoia">
+<a class="under" href="#chair-guide">← All chairs</a>
+<div class="catalog-detail-grid">
+<div class="catalog-detail-heading">
+<h2 data-detail-heading="" tabindex="-1">Sequoia</h2>
+<p class="price">$2,529.99 USD</p>
+</div>
+<div aria-label="Sequoia photographs" class="catalog-detail-gallery">
+<div class="catalog-detail-photos">
+<img alt="Sequoia in Black — Studio" data-photo-finish="1" data-photo-view="studio" height="760" loading="lazy" src="assets/guide-ps6500-black-studio-760.webp" width="760"/>
+<img alt="Sequoia in Black — In a room" data-photo-finish="1" data-photo-view="lifestyle" height="720" loading="lazy" src="assets/guide-ps6500-black-lifestyle-720.webp" width="720"/>
+<img alt="Sequoia in Black — Roller track" data-photo-finish="1" data-photo-view="track" height="900" loading="lazy" src="assets/guide-ps6500-black-track-900.webp" width="900"/>
+<img alt="Sequoia in Brown — Studio" data-photo-finish="2" data-photo-view="studio" height="760" loading="lazy" src="assets/guide-ps6500-brown-studio-760.webp" width="760"/>
+<img alt="Sequoia in Brown — In a room" data-photo-finish="2" data-photo-view="lifestyle" height="720" loading="lazy" src="assets/guide-ps6500-brown-lifestyle-720.webp" width="720"/>
+<img alt="Sequoia in Brown — Roller track" data-photo-finish="2" data-photo-view="track" height="900" loading="lazy" src="assets/guide-ps6500-brown-track-900.webp" width="900"/>
+</div>
+<fieldset class="catalog-views">
+<legend class="sr">Photograph</legend>
+<label><input checked="" name="photo-arbor-lineup-guide_ps6500" type="radio" value="studio"/><span>Studio</span></label>
+<label><input name="photo-arbor-lineup-guide_ps6500" type="radio" value="lifestyle"/><span>In a room</span></label>
+<label><input name="photo-arbor-lineup-guide_ps6500" type="radio" value="track"/><span>Roller track</span></label>
+</fieldset>
+</div>
+<div class="catalog-detail-copy">
+<p>Sequoia pairs a long 4D roller track with three recline positions. Save a favorite routine, change supported settings by voice, and choose from 25 ambient sounds. Allow 74.02 inches for the reclined chair itself, plus the clearance required for placement.</p>
+<fieldset class="guide-finish">
+<legend>Finish</legend>
+<label>
+<input checked="" data-color="Black" name="detail-finish-arbor-lineup-guide_ps6500" type="radio" value="1"/>
+<span aria-hidden="true" class="swatch swatch-black"></span>Black
+          </label>
+<label>
+<input data-color="Brown" name="detail-finish-arbor-lineup-guide_ps6500" type="radio" value="2"/>
+<span aria-hidden="true" class="swatch swatch-brown"></span>Brown
+          </label>
+</fieldset>
+<button class="button catalog-add" data-catalog-add="" data-color="Black" data-price-cents="252999" data-product-key="ps6500" data-title="Sequoia" type="button">
+    Add to bag <span aria-hidden="true">→</span>
+</button>
+<p class="catalog-availability">Currently unavailable to order.
+
+<a data-contact-link="" href="#contact-us">Contact Us</a>
+</p>
+</div>
+</div>
+<div class="catalog-detail-specs">
+<section><h3>Massage and controls</h3>
+<ul><li>4D rollers on a long SL track</li><li>27 automatic programs</li><li>Three zero-gravity positions</li><li>7-inch touchscreen and voice control</li><li>Favorite settings</li><li>28 air cells</li><li>Lumbar heat and foot rollers</li><li>25 ambient sounds</li><li>Bluetooth audio and wireless charging</li></ul>
+</section>
+<section><h3>Fit in your room</h3>
+<table><caption>Depth × width × height</caption><tbody>
+<tr><th scope="row">Upright</th><td>61.81 × 30.71 × 48.82 in</td></tr>
+<tr><th scope="row">Reclined</th><td>74.02 × 30.71 × 38.98 in</td></tr>
+<tr><th scope="row">Carton</th><td>58.46 × 31.89 × 50.2 in</td></tr>
+<tr><th scope="row">Chair weight</th><td>205 lb</td></tr>
+</tbody></table>
+<a class="under" href="https://cdn.shopify.com/s/files/1/0023/2525/0115/files/PS6500__20230516-__compressed.pdf?v=1760938058">Manufacturer’s manual (PDF)</a>
+</section>
+</div>
+</article>
+</div>
+</section>
+<section class="wrap slab comparison" data-compare="" id="chair-comparison" tabindex="-1">
+<div class="section-head"><h2>Compare chairs</h2></div>
+<div class="model-selectors" hidden="">
+<label>Chair 1
+          <select data-slot="1">
+<option selected="" value="1">Alder</option>
+<option value="2">Linden</option>
+<option value="3">Sequoia</option>
+</select>
+</label>
+<label>Chair 2
+          <select data-slot="2">
+<option value="1">Alder</option>
+<option selected="" value="2">Linden</option>
+<option value="3">Sequoia</option>
+</select>
+</label>
+</div>
+<table class="compare-table">
+<caption class="sr">Chair specifications and current prices</caption>
+<thead><tr>
+<th scope="col">Specification</th>
+<th data-col="1" scope="col">
+<a href="#product-alder">Alder</a>
+</th>
+<th data-col="2" scope="col">
+<a href="#product-linden">Linden</a>
+</th>
+<th data-col="3" scope="col">
+<a href="#product-sequoia">Sequoia</a>
+</th>
+</tr></thead>
+<tbody>
+<tr><th scope="row">Upright (D × W × H)</th>
+<td data-col="1">
+              57.1 × 29.1 × 42.1 in
+
+            </td>
+<td data-col="2">
+              57.5 × 29.1 × 44.5 in
+
+            </td>
+<td data-col="3">
+              61.81 × 30.71 × 48.82 in
+
+            </td>
+</tr>
+<tr><th scope="row">Reclined (D × W × H)</th>
+<td data-col="1">
+              66.1 × 29.1 × 35.4 in
+
+            </td>
+<td data-col="2">
+              70.1 × 29.1 × 38.6 in
+
+            </td>
+<td data-col="3">
+              74.02 × 30.71 × 38.98 in
+
+            </td>
+</tr>
+<tr><th scope="row">Carton (D × W × H)</th>
+<td data-col="1">
+              46.5 × 29.5 × 43.7 in
+
+            </td>
+<td data-col="2">
+              50.4 × 29.9 × 47.2 in
+
+            </td>
+<td data-col="3">
+              58.46 × 31.89 × 50.2 in
+
+            </td>
+</tr>
+<tr><th scope="row">Massage controls</th>
+<td data-col="1">
+<details>
+<summary>Features</summary>
+<ul><li>3D rollers on an SL track</li><li>16 automatic programs</li><li>Two zero-gravity positions</li><li>7-inch touchscreen</li><li>Lumbar heat</li><li>26 air cells</li><li>Foot rollers and extendable footrest</li><li>Bluetooth audio and USB charging</li></ul>
+</details>
+</td>
+<td data-col="2">
+<details>
+<summary>Features</summary>
+<ul><li>4D rollers on an SL track</li><li>20 automatic programs</li><li>Two zero-gravity positions</li><li>Five roller intensity levels and five air pressure levels</li><li>30 air cells</li><li>Shoulder detection</li><li>Lumbar heat and foot rollers</li><li>Touch controls and wireless charging</li></ul>
+</details>
+</td>
+<td data-col="3">
+<details>
+<summary>Features</summary>
+<ul><li>4D rollers on a long SL track</li><li>27 automatic programs</li><li>Three zero-gravity positions</li><li>7-inch touchscreen and voice control</li><li>Favorite settings</li><li>28 air cells</li><li>Lumbar heat and foot rollers</li><li>25 ambient sounds</li><li>Bluetooth audio and wireless charging</li></ul>
+</details>
+</td>
+</tr>
+<tr><th scope="row">Price</th>
+<td data-col="1">
+
+
+
+                $1,264.99 USD
+
+            </td>
+<td data-col="2">
+
+
+
+                $1,759.99 USD
+
+            </td>
+<td data-col="3">
+
+
+
+                $2,529.99 USD
+
+            </td>
+</tr>
+</tbody>
+</table>
+</section>
+<section aria-labelledby="standalone-contact-title" class="wrap slab guidance" id="contact-us">
+<template id="standalone-inquiry">
+<div>
+<a class="under" href="#chair-guide">Back to the chairs</a>
+<h1 id="standalone-contact-title" tabindex="-1">Contact Us</h1>
+<p>Ask Dusk Arbor about choosing a chair, measuring your space, or an existing order.</p>
+</div>
+<form data-inquiry-draft="" method="dialog">
+<p>This standalone catalog saves an inquiry to your device. Send it through the contact form on the Dusk Arbor store.</p>
+<label>Reason
+        <select name="reason">
+<option>Choosing a chair</option>
+<option>Fit and delivery</option>
+<option>Order question</option>
+<option>Returns or warranty</option>
+<option>Other</option>
+</select>
+</label>
+<label>Name <input autocomplete="name" name="name" required=""/></label>
+<label>Email <input autocomplete="email" name="email" required="" spellcheck="false" type="email"/></label>
+<label>Order number (optional) <input autocomplete="off" name="order"/></label>
+<label>Message <textarea name="message" required="" rows="6"></textarea></label>
+<button class="button" type="submit">Download inquiry</button>
+<p data-download-status="" hidden="" role="status">Your inquiry is ready in the downloaded text file.</p>
+</form>
+</template>
+<noscript><p>Enable JavaScript to prepare an inquiry file.</p></noscript>
 </section>
 </main>
 <footer class="footer"><div class="wrap footer-grid">
 <div><a class="brand" href="#main" translate="no">DUSK ARBOR</a><p>An independent authorized retailer of Real Relax massage chairs.</p></div>
 <nav aria-label="Explore"><h2>Explore</h2>
 <a href="#chair-guide">Chairs</a>
+<a href="#chair-comparison">Compare</a>
 </nav>
-
+<nav aria-label="Customer care"><h2>Customer care</h2>
+<a data-contact-link="" href="#contact-us">Contact Us</a>
+</nav>
 </div></footer>
+<dialog aria-labelledby="catalog-bag-heading" class="catalog-bag" id="shopping-bag">
+<header><h2 id="catalog-bag-heading">Your bag</h2><button data-bag-close="" type="button">Close</button></header>
+<p data-bag-empty="">Your bag is empty.</p>
+<ul data-bag-lines=""></ul>
+<div data-bag-totals="" hidden="">
+<p class="bag-subtotal">Subtotal <strong data-bag-subtotal=""></strong></p>
+<p class="bag-checkout-note">Checkout requires a connected Shopify store.</p>
+<a class="under" data-bag-inquiry="" data-contact-link="" href="#contact-us">Contact us about this bag</a>
+</div>
+<p aria-live="polite" class="sr" data-bag-status="" role="status"></p>
+</dialog>
 </body>
 </html>

@@ -6,7 +6,6 @@
 {% elsif section.blocks.size > 0 %}
 <section id="chair-guide" class="wrap slab reference-guide">
   <div class="section-head"><h2>{{ section.settings.heading | escape }}</h2></div>
-  <p class="guide-note">Real Relax manufacturer prices in USD{% if section.settings.price_date != blank %}, recorded {{ section.settings.price_date | escape }}{% endif %}.</p>
   <div class="cards">
     {% for block in section.blocks %}
       {% assign handle = block.settings.model | downcase | prepend: 'real-relax-' %}
@@ -18,7 +17,16 @@
       {% endif %}
     {% endfor %}
   </div>
+  <div class="catalog-details">
+    {% for block in section.blocks %}
+      {% assign handle = block.settings.model | downcase | prepend: 'real-relax-' %}
+      {% if all_products[handle] == blank %}
+        {% render 'catalog-detail', block: block, section_id: section.id %}
+      {% endif %}
+    {% endfor %}
+  </div>
 </section>
+{% render 'guide-comparison', chairs: section.blocks %}
 {% elsif request.design_mode %}<p class="wrap">{{ 'arbor.select_a_collection_with_visible_products_for_the' | t }}</p>{% endif %}
 
 {% schema %}
@@ -35,12 +43,6 @@
       "type": "collection",
       "id": "collection",
       "label": "Collection"
-    },
-    {
-      "type": "text",
-      "id": "price_date",
-      "label": "Manufacturer price observation date",
-      "default": "November 19, 2026"
     }
   ],
   "presets": [
@@ -75,9 +77,9 @@
           "default": "Favor-27"
         },
         {
-          "type": "text",
-          "id": "price",
-          "label": "Manufacturer price in USD"
+          "type": "number",
+          "id": "price_cents",
+          "label": "Dusk Arbor price in US cents"
         },
         {
           "type": "textarea",
@@ -113,16 +115,6 @@
           "type": "url",
           "id": "manual",
           "label": "Manufacturer manual"
-        },
-        {
-          "type": "url",
-          "id": "url_1",
-          "label": "Khaki listing (PS6500 Black)"
-        },
-        {
-          "type": "url",
-          "id": "url_2",
-          "label": "Black listing (PS6500 Brown)"
         }
       ]
     }

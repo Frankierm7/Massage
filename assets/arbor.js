@@ -7,6 +7,21 @@
     }
   });
 
+  document.addEventListener('click', event => {
+    const link = event.target.closest('.mobile-menu a[href]');
+    if (!link || event.defaultPrevented || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    const menu = link.closest('.mobile-menu');
+    menu.open = false;
+    const destination = new URL(link.href);
+    if (destination.origin === location.origin && destination.pathname === location.pathname && destination.search === location.search) {
+      const target = document.getElementById(destination.hash.slice(1));
+      if (target) {
+        if (!target.hasAttribute('tabindex')) target.tabIndex = -1;
+        target.focus({preventScroll: true});
+      }
+    }
+  });
+
   function compare(section) {
     const selectors = section.querySelector('.model-selectors');
     if (!selectors || selectors.dataset.ready) return;

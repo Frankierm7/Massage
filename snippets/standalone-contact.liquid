@@ -1,0 +1,34 @@
+<section id="contact-us" class="wrap slab guidance" aria-labelledby="standalone-contact-title">
+  <template id="standalone-inquiry">
+    <div>
+      <a href="#chair-guide" class="under">{{ 'contact_us.back' | t }}</a>
+      <h1 id="standalone-contact-title" tabindex="-1">{{ 'contact_us.title' | t }}</h1>
+      <p>{{ 'contact_us.intro' | t }}</p>
+    </div>
+    {% if shop.secure_url != blank %}
+      {% assign store_contact = settings.contact_page.url %}
+      {% if store_contact == blank %}{% assign store_contact = routes.root_url | append: '?view=contact' %}{% endif %}
+      <div><a data-store-contact class="button" href="{{ shop.secure_url | append: store_contact | escape }}">{{ 'contact_us.open_form' | t }}</a></div>
+    {% else %}
+    <form data-inquiry-draft method="dialog">
+      <p>{{ 'contact_us.draft_intro' | t }}</p>
+      <label>{{ 'arbor.reason' | t }}
+        <select name="reason">
+          <option>{{ 'arbor.choosing_a_chair' | t }}</option>
+          <option>{{ 'arbor.fit_and_delivery' | t }}</option>
+          <option>{{ 'arbor.order_question' | t }}</option>
+          <option>{{ 'arbor.returns_or_warranty' | t }}</option>
+          <option>{{ 'arbor.other' | t }}</option>
+        </select>
+      </label>
+      <label>{{ 'arbor.name' | t }} <input name="name" autocomplete="name" required></label>
+      <label>{{ 'arbor.email' | t }} <input name="email" type="email" autocomplete="email" spellcheck="false" required></label>
+      <label>{{ 'arbor.order_number_optional' | t }} <input name="order" autocomplete="off"></label>
+      <label>{{ 'arbor.message' | t }} <textarea name="message" rows="6" required></textarea></label>
+      <button class="button" type="submit">{{ 'contact_us.save' | t }}</button>
+      <p data-download-status role="status" hidden>{{ 'contact_us.saved' | t }}</p>
+    </form>
+    {% endif %}
+  </template>
+  <noscript><p>{{ 'contact_us.no_script' | t }}</p></noscript>
+</section>

@@ -1,4 +1,5 @@
-{% assign description = photo.alt | default: label %}
+{% assign original_alt = photo.alt | default: label %}
+{% capture description %}{% render 'chair-alt', text: original_alt %}{% endcapture %}
 <a href="{{ photo | image_url: width: 2000 }}" data-thumb data-alt="{{ description | escape }}"
    data-sizes="(min-width: 760px) 55vw, 100vw"
    data-srcset="{{ photo | image_url: width: 480 }} 480w, {{ photo | image_url: width: 800 }} 800w, {{ photo | image_url: width: 1280 }} 1280w"

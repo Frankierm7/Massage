@@ -1,0 +1,59 @@
+<section id="chair-comparison" class="wrap slab comparison" tabindex="-1" data-compare>
+  <div class="section-head"><h2>{{ 'arbor.compare_chairs' | t }}</h2></div>
+  {% if chairs.size > 1 %}
+    <div class="model-selectors" hidden>
+      {% for slot in (1..2) %}
+        <label>Chair {{ slot }}
+          <select data-slot="{{ slot }}">
+            {% for entry in chairs limit: 3 %}
+              <option value="{{ forloop.index }}" {% if forloop.index == slot %}selected{% endif %}>{% render 'chair-name', model: entry.settings.model %}</option>
+            {% endfor %}
+          </select>
+        </label>
+      {% endfor %}
+    </div>
+  {% endif %}
+  <table class="compare-table">
+    <caption class="sr">{{ 'arbor.chair_specifications_and_current_prices' | t }}</caption>
+    <thead><tr>
+      <th scope="col">{{ 'arbor.specification' | t }}</th>
+      {% for entry in chairs limit: 3 %}
+        {% capture name %}{% render 'chair-name', model: entry.settings.model %}{% endcapture %}
+        {% assign handle = entry.settings.model | downcase | prepend: 'real-relax-' %}
+        {% assign product_match = all_products[handle] %}
+        <th scope="col" data-col="{{ forloop.index }}">
+          {% if product_match != blank %}<a href="{{ product_match.url }}">{{ name | strip }}</a>
+          {% else %}<a href="#product-{{ name | strip | downcase | escape }}">{{ name | strip }}</a>{% endif %}
+        </th>
+      {% endfor %}
+    </tr></thead>
+    <tbody>
+      {% assign fields = 'Upright (D × W × H):upright|Reclined (D × W × H):reclined|Carton (D × W × H):carton|Massage controls:features|Price:price' | split: '|' %}
+      {% for field in fields %}
+        {% assign pair = field | split: ':' %}
+        <tr><th scope="row">{{ pair.first }}</th>
+          {% for entry in chairs limit: 3 %}
+            {% assign key = pair.last %}
+            <td data-col="{{ forloop.index }}">
+              {% case key %}
+              {% when 'features' %}
+                {% if entry.settings.features != blank %}
+                  <details>
+                    <summary>Features</summary>
+                    {% assign features = entry.settings.features | newline_to_br | split: '<br />' %}
+                    <ul>{% for feature in features %}<li>{{ feature | strip | escape }}</li>{% endfor %}</ul>
+                  </details>
+                {% endif %}
+              {% when 'price' %}
+                {% assign product_handle = entry.settings.model | downcase | prepend: 'real-relax-' %}
+                {% assign matched = all_products[product_handle] %}
+                {% if matched != blank %}{{ matched.price | money_with_currency }}{% else %}{% render 'catalog-price', cents: entry.settings.price_cents %}{% endif %}
+              {% else %}{{ entry.settings[key] | escape }}
+              {% endcase %}
+            </td>
+          {% endfor %}
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>

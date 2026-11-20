@@ -7,18 +7,18 @@
   endif
 %}
 {% if chairs.size > 0 %}
-<section class="wrap slab comparison" data-compare>
+<section id="store-comparison" class="wrap slab comparison" tabindex="-1" data-compare>
   <div class="section-head">
     {% if is_page %}<h1>{{ page.title | escape }}</h1>{% else %}<h2>{{ 'arbor.what_changes_when_you_move_up' | t }}</h2>{% endif %}
     {% unless is_page %}{% if settings.compare_page != blank %}<a class="under" href="{{ settings.compare_page.url }}">{{ 'arbor.compare_chairs' | t }}</a>{% endif %}{% endunless %}
   </div>
   {% if chairs.size > 1 %}
   <div class="model-selectors" hidden>{% for slot in (1..2) %}<label>Chair {{ slot }}
-    <select data-slot="{{ slot }}">{% for chair in chairs limit: 3 %}<option value="{{ forloop.index }}" {% if forloop.index == slot %}selected{% endif %}>{{ chair.metafields.chair.model.value | default: chair.title | escape }}</option>{% endfor %}</select>
+    <select data-slot="{{ slot }}">{% for chair in chairs limit: 3 %}<option value="{{ forloop.index }}" {% if forloop.index == slot %}selected{% endif %}>{% render 'chair-name', chair: chair %}</option>{% endfor %}</select>
   </label>{% endfor %}</div>{% endif %}
   <table class="compare-table">
     <caption class="sr">{{ 'arbor.chair_specifications_and_current_prices' | t }}</caption>
-    <thead><tr><th scope="col">{{ 'arbor.specification' | t }}</th>{% for chair in chairs limit: 3 %}<th scope="col" data-col="{{ forloop.index }}"><a href="{{ chair.url }}">{{ chair.metafields.chair.model.value | default: chair.title | escape }}</a></th>{% endfor %}</tr></thead>
+    <thead><tr><th scope="col">{{ 'arbor.specification' | t }}</th>{% for chair in chairs limit: 3 %}<th scope="col" data-col="{{ forloop.index }}"><a href="{{ chair.url }}">{% render 'chair-name', chair: chair %}</a></th>{% endfor %}</tr></thead>
     <tbody>
     {% if is_page %}
       {% assign specs = 'Massage|Mechanism:mechanism|Track:track|Automatic programs:programs|Recline positions:positions|Room|Reclined depth (in):reclined_depth|Chair width (in):upright_width|Carton width (in):carton_width|Controls|Adjustments:controls|Price:price' | split: '|' %}
@@ -32,7 +32,7 @@
       {% endif %}
     {% endfor %}</tbody>
   </table>
-  <noscript><ul class="spec-links">{% for chair in chairs limit: 3 %}<li><a href="{{ chair.url }}#fit">{{ chair.title | escape }} specifications</a></li>{% endfor %}</ul></noscript>
+  <noscript><ul class="spec-links">{% for chair in chairs limit: 3 %}<li><a href="{{ chair.url }}#fit">{% render 'chair-name', chair: chair %} specifications</a></li>{% endfor %}</ul></noscript>
 </section>{% elsif is_page %}<section class="wrap slab"><h1>{{ page.title | escape }}</h1><p>{{ 'arbor.there_are_currently_no_chairs_to_compare' | t }}</p></section>
 {% elsif request.design_mode %}<p class="wrap">{{ 'arbor.select_up_to_three_comparison_products' | t }}</p>{% endif %}
 

@@ -1,15 +1,16 @@
 {% assign variant = product.selected_variant | default: product.selected_or_first_available_variant %}
+{% capture display_name %}{% render 'chair-name', chair: product, plain: true %}{% endcapture %}
 {% assign facts = product.metafields.chair %}
 {% assign lineup = settings.chairs | default: collections['massage-chairs'] %}
 <section class="wrap slab product">
   {% if lineup != blank %}<a class="under crumb" href="{{ lineup.url }}">← {{ lineup.title | escape }}</a>{% endif %}
   <div class="product-grid">
-    <div class="identity"><h1>{{ product.title | escape }}</h1>
+    <div class="identity"><h1>{{ display_name | escape }}</h1>
       <p class="price">{{ variant.price | money_with_currency }} {% if variant.compare_at_price > variant.price %}<s>{{ variant.compare_at_price | money_with_currency }}</s>{% endif %}</p>
     </div>
-    {% render 'variant-gallery', variant: variant %}
+    {% render 'variant-gallery', variant: variant, chair: product %}
     <div class="buy">
-      {{ product.description }}
+      {% render 'chair-copy', text: product.description %}
       <p class="retailer">{{ 'arbor.sold_by_dusk_arbor_an_authorized_real_relax' | t }}</p>
       <fieldset><legend>{{ 'arbor.finish' | t }} <strong>{{ variant.option1 | escape }}</strong></legend>
         <div class="finishes">{% for choice in product.variants %}
@@ -27,7 +28,7 @@
         {% else %}<p>{{ 'arbor.this_finish_is_sold_out_choose_another_finish' | t }}</p><button class="button" disabled>{{ 'arbor.sold_out' | t }}</button>{% endif %}
         <p role="alert" class="form-error" tabindex="-1"></p>{{ form.errors | default_errors }}
       {% endform %}
-      <div class="inline-links">{% if settings.contact_page != blank %}<a href="{{ settings.contact_page.url }}?model={{ product.title | url_encode }}&amp;finish={{ variant.option1 | url_encode }}">{{ 'arbor.ask_about_this_chair' | t }}</a>{% endif %}{% render 'policy-links' %}</div>
+      <div class="inline-links"><a data-contact-link href="{% if settings.contact_page != blank %}{{ settings.contact_page.url }}?{% else %}{{ routes.root_url }}?view=contact&amp;{% endif %}model={{ display_name | url_encode }}&amp;finish={{ variant.option1 | url_encode }}">{{ 'arbor.ask_about_this_chair' | t }}</a>{% render 'policy-links' %}</div>
       {% for block in section.blocks %}{% render block %}{% endfor %}
     </div>
   </div>
@@ -41,14 +42,14 @@
     <div class="control-grid">
       <article>
         {% assign track_image = variant.metafields.chair.gallery.value[1] %}
-        {% if track_image.preview_image %}{% render 'chair-image', image: track_image.preview_image, label: product.title, sizes: '(min-width: 760px) 40vw, 100vw' %}{% endif %}
+        {% if track_image.preview_image %}{% render 'chair-image', image: track_image.preview_image, label: display_name, sizes: '(min-width: 760px) 40vw, 100vw' %}{% endif %}
         <h3>{{ 'arbor.roller_track' | t }}</h3>
         <p>{{ facts.mechanism.value | escape }} · {{ facts.track.value | escape }}</p>
         <ul>{% for feature in facts.features.value %}<li>{{ feature | escape }}</li>{% endfor %}</ul>
       </article>
       <article>
         {% assign room_image = variant.metafields.chair.gallery.value | first %}
-        {% if room_image.preview_image %}{% render 'chair-image', image: room_image.preview_image, label: product.title, sizes: '(min-width: 760px) 40vw, 100vw' %}{% endif %}
+        {% if room_image.preview_image %}{% render 'chair-image', image: room_image.preview_image, label: display_name, sizes: '(min-width: 760px) 40vw, 100vw' %}{% endif %}
         <h3>{{ 'arbor.programs_and_adjustments' | t }}</h3>
         <p>{{ facts.controls.value | escape }}</p>
         {% if facts.programs.value %}<p>{{ 'arbor.automatic_program_count' | t: count: facts.programs.value }}</p>{% endif %}
@@ -61,7 +62,7 @@
     <details><summary>{{ 'arbor.what_should_i_measure_before_delivery' | t }}</summary><p>{{ 'arbor.check_the_carton_width_and_height_against_the' | t }}</p><a href="#fit">{{ 'arbor.see_the_measurements' | t }}</a></details></div></div>{% endif %}
   {% if settings.policy_summary != blank %}<div class="product-detail"><h2>{{ 'arbor.delivery_returns_and_warranty' | t }}</h2><div>{{ settings.policy_summary }}<div class="inline-links">{% render 'policy-links' %}</div></div></div>{% endif %}
   {% if facts.alternative.value != blank or settings.compare_page != blank %}<div class="product-detail"><h2>{{ 'arbor.compare_your_options' | t }}</h2><div>
-    {% if facts.alternative.value != blank %}<a class="under" href="{{ facts.alternative.value.url }}">{{ facts.alternative.value.title | escape }}</a><p>{{ facts.alternative.value.metafields.chair.highlight.value | escape }}</p>{% endif %}
+    {% if facts.alternative.value != blank %}<a class="under" href="{{ facts.alternative.value.url }}">{% render 'chair-name', chair: facts.alternative.value %}</a><p>{{ facts.alternative.value.metafields.chair.highlight.value | escape }}</p>{% endif %}
     {% if settings.compare_page != blank %}<a class="under" href="{{ settings.compare_page.url }}">{{ 'arbor.compare_chairs' | t }}</a>{% endif %}</div></div>{% endif %}
 </section>
 

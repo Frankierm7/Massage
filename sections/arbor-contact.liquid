@@ -1,8 +1,12 @@
-<section class="wrap slab guidance"><div><h1>{{ page.title | escape }}</h1>{{ page.content }}</div><div>
+<section class="wrap slab guidance"><div>
+  <h1>{{ 'contact_us.title' | t }}</h1>
+  {% if page.content != blank %}{{ page.content }}{% else %}<p>{{ 'contact_us.intro' | t }}</p>{% endif %}
+</div><div>
 {% form 'contact', id: 'ContactForm' %}
   {% if form.posted_successfully? %}<p role="status" tabindex="-1" data-result>{{ 'arbor.thank_you_dusk_arbor_has_received_your_message' | t }}</p>{% else %}
     {% if form.errors %}<div role="alert" tabindex="-1" data-result>{{ form.errors | default_errors }}</div>{% endif %}
-    <label>{{ 'arbor.reason' | t }} <select name="contact[Reason]"><option>{{ 'arbor.choosing_a_chair' | t }}</option><option>{{ 'arbor.fit_and_delivery' | t }}</option><option>{{ 'arbor.order_question' | t }}</option><option>{{ 'arbor.returns_or_warranty' | t }}</option><option>{{ 'arbor.other' | t }}</option></select></label>
+    <label>{{ 'arbor.reason' | t }} {% assign reasons = 'choosing_a_chair,fit_and_delivery,order_question,returns_or_warranty,other' | split: ',' %}
+      <select name="contact[Reason]">{% for key in reasons %}{% assign reason = key | prepend: 'arbor.' | t %}<option{% if form.Reason == reason %} selected{% endif %}>{{ reason | escape }}</option>{% endfor %}</select></label>
     <label>{{ 'arbor.name' | t }} <input name="contact[name]" autocomplete="name" value="{{ form.name | default: customer.name | escape }}" required></label>
     <label>{{ 'arbor.email' | t }} <input type="email" name="contact[email]" autocomplete="email" spellcheck="false" value="{{ form.email | default: customer.email | escape }}" required></label>
     <label>{{ 'arbor.order_number_optional' | t }} <input name="contact[Order number]" autocomplete="off" value="{{ form['Order number'] | escape }}"></label>

@@ -5,7 +5,7 @@
       <h2>{{ 'arbor.measure_the_reclined_chair' | t }}</h2><p>{{ 'arbor.mark_the_fully_reclined_depth_and_width_on' | t }}</p>
       <h2>{{ 'arbor.trace_the_delivery_route' | t }}</h2><p>{{ 'arbor.measure_each_doorway_hallway_landing_and_turn_include' | t }}</p>
       {% assign lineup = settings.chairs | default: collections['massage-chairs'] %}
-      {% for chair in lineup.products limit: 3 %}<details><summary>{{ chair.metafields.chair.model.value | default: chair.title | escape }} measurements</summary>{% render 'chair-dimensions', chair: chair %}<a href="{{ chair.url }}">{{ 'arbor.view_chair' | t }}</a></details>{% endfor %}
+      {% for chair in lineup.products limit: 3 %}<details><summary>{% render 'chair-name', chair: chair %} measurements</summary>{% render 'chair-dimensions', chair: chair %}<a href="{{ chair.url }}">{{ 'arbor.view_chair' | t }}</a></details>{% endfor %}
       <h2>{{ 'arbor.confirm_delivery_service' | t }}</h2><p>{{ 'arbor.ask_about_the_service_level_packaging_and_any' | t }}</p>
     {% when 'about' %}
       <p class="lead">{{ 'arbor.dusk_arbor_is_an_independent_authorized_retailer_of' | t }}</p>

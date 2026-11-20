@@ -161,5 +161,15 @@
     "setup_questions": "Setup questions",
     "recline_count": "A reclined chair position. This model offers {{ count }} positions.",
     "a_quieter": "A quieter"
+  },
+  "contact_us": {
+    "title": "Contact Us",
+    "intro": "Ask Dusk Arbor about choosing a chair, measuring your space, or an existing order.",
+    "back": "Back to the chairs",
+    "draft_intro": "This standalone catalog saves an inquiry to your device. Send it through the contact form on the Dusk Arbor store.",
+    "save": "Download inquiry",
+    "saved": "Your inquiry is ready in the downloaded text file.",
+    "no_script": "Enable JavaScript to prepare an inquiry file.",
+    "open_form": "Open the Dusk Arbor contact form"
   }
 }

@@ -10,9 +10,21 @@
   endif
   assign browse = browse | default: '#chair-guide'
   assign compare = section.settings.compare | default: settings.compare_page.url
+  if compare == blank
+    if lineup.products_count > 0
+      assign compare = '#store-comparison'
+    else
+      assign compare = '#chair-comparison'
+    endif
+  endif
   assign guide_photo = false
   if photo == blank and section.settings.chair == blank
     assign guide_photo = true
+    assign guide_chair_url = finish.url | default: chair.url
+    assign count = lineup.products_count | default: 0
+    if guide_chair_url == blank and count == 0
+      assign guide_chair_url = '#product-linden'
+    endif
   endif
 %}
 <section class="hero wrap{% unless photo or guide_photo %} text-hero{% endunless %}">
@@ -23,15 +35,18 @@
       {% if compare != blank %}<a class="under" href="{{ compare }}">{{ 'arbor.compare_chairs' | t }}</a>{% endif %}</div>
   </div>
   {% if photo %}<figure class="hero-photo">{% render 'chair-image', image: photo, label: chair.title, eager: true, sizes: '(min-width: 760px) 56vw, 100vw' %}
-    {% if finish and section.settings.image == blank %}<figcaption><a href="{{ finish.url }}">{{ chair.metafields.chair.model.value | default: chair.title | escape }} <span> / </span> {{ finish.option1 | escape }}</a></figcaption>{% endif %}
+    {% if finish and section.settings.image == blank %}<figcaption><a href="{{ finish.url }}">{% render 'chair-name', chair: chair %} <span> / </span> {{ finish.option1 | escape }}</a></figcaption>{% endif %}
   </figure>
   {% elsif guide_photo %}
     <figure class="hero-photo">
       <img src="{{ 'guide-ps5200-khaki-lifestyle-1280.webp' | asset_url }}"
            srcset="{{ 'guide-ps5200-khaki-lifestyle-720.webp' | asset_url }} 720w, {{ 'guide-ps5200-khaki-lifestyle-1280.webp' | asset_url }} 1280w"
            sizes="(min-width: 760px) 56vw, 100vw" width="1280" height="1280" fetchpriority="high"
-           alt="Khaki Real Relax PS5200 massage chair in a furnished living room">
-      <figcaption><span class="guide-caption">PS5200 / Khaki</span></figcaption>
+           alt="Linden massage chair in Khaki in a furnished living room">
+      <figcaption>
+        {% if guide_chair_url != blank %}<a href="{{ guide_chair_url }}">Linden / Khaki</a>
+        {% else %}<span class="guide-caption">Linden / Khaki</span>{% endif %}
+      </figcaption>
     </figure>
   {% elsif request.design_mode %}<p>{{ 'arbor.choose_the_lead_photograph_or_assign_the_khaki' | t }}</p>{% endif %}
 </section>

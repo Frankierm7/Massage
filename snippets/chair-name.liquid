@@ -1,0 +1,20 @@
+{%- liquid
+  assign key = model | default: chair.metafields.chair.model.value | default: chair.handle | downcase
+  assign key = key | remove_first: 'real-relax-'
+  case key
+    when 'favor-27'
+      assign name = 'Alder'
+    when 'ps5200'
+      assign name = 'Linden'
+    when 'ps6500'
+      assign name = 'Sequoia'
+    else
+      assign name = chair.title | default: model
+  endcase
+  assign name = chair.metafields.chair.display_name.value | default: name
+  if plain
+    echo name
+  else
+    echo name | escape
+  endif
+-%}

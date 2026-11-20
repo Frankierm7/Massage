@@ -1,8 +1,16 @@
+{% assign home_path = routes.root_url %}
+{% if request.page_type == 'index' and template.suffix == blank %}{% assign home_path = '' %}{% endif %}
 {% if menu.links.size > 0 %}
-  {% for link in menu.links %}<a href="{{ link.url }}" {% if link.current %}aria-current="page"{% endif %}>{{ link.title | escape }}</a>{% endfor %}
+  {% for link in menu.links %}{% if link.type == 'search_link' or link.url == routes.search_url %}{% continue %}{% endif %}<a href="{{ link.url }}" {% if link.current %}aria-current="page"{% endif %}>{{ link.title | escape }}</a>{% endfor %}
 {% else %}
   {% assign chairs = settings.chairs | default: collections['massage-chairs'] %}
-  {% if chairs != blank and chairs.products_count > 0 %}<a href="{{ chairs.url }}">{{ 'arbor.chairs' | t }}</a>{% else %}<a href="{{ routes.root_url }}#chair-guide">{{ 'arbor.chairs' | t }}</a>{% endif %}
-  {% if settings.compare_page != blank %}<a href="{{ settings.compare_page.url }}">{{ 'arbor.compare' | t }}</a>{% endif %}
+  {% if chairs != blank and chairs.products_count > 0 %}<a href="{{ chairs.url }}">{{ 'arbor.chairs' | t }}</a>{% else %}<a href="{{ home_path }}#chair-guide">{{ 'arbor.chairs' | t }}</a>{% endif %}
+  {% if settings.compare_page != blank %}
+    <a href="{{ settings.compare_page.url }}">{{ 'arbor.compare' | t }}</a>
+  {% elsif chairs.products_count > 0 %}
+    <a href="{{ home_path }}#store-comparison">{{ 'arbor.compare' | t }}</a>
+  {% else %}
+    <a href="{{ home_path }}#chair-comparison">{{ 'arbor.compare' | t }}</a>
+  {% endif %}
   {% if settings.about_page != blank %}<a href="{{ settings.about_page.url }}">{{ 'arbor.about' | t }}</a>{% endif %}
 {% endif %}

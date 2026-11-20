@@ -13,6 +13,22 @@
 
   if request.page_type == 'product'
     assign og_type = 'product'
+    capture display_name
+      render 'chair-name', chair: product, plain: true
+    endcapture
+    if page_title == product.title
+      assign og_title = display_name
+    else
+      capture og_title
+        render 'chair-alt', text: og_title
+      endcapture
+    endif
+    capture og_description
+      render 'chair-alt', text: og_description
+    endcapture
+  elsif request.page_type == 'index' and template.suffix == 'contact'
+    assign og_title = 'contact_us.title' | t
+    assign og_description = 'contact_us.intro' | t
   elsif request.page_type == 'article'
     assign og_type = 'article'
   elsif request.page_type == 'password'
@@ -61,8 +77,10 @@
 {%- endif -%}
 
 {%- if request.page_type == 'product' -%}
+  {%- assign native_json_title = product.title | json -%}
+  {%- assign display_json_title = display_name | json -%}
   <script type="application/ld+json">
-    {{ product | structured_data }}
+    {{ product | structured_data | replace: native_json_title, display_json_title }}
   </script>
 
   <meta
@@ -89,10 +107,10 @@
 >
 
 <title>
-  {{ page_title | escape }}
+  {{ og_title | escape }}
   {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
   {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
-  {%- unless page_title contains shop.name %} &ndash; {{ shop.name | escape }}{% endunless -%}
+  {%- unless og_title contains shop.name %} &ndash; {{ shop.name | escape }}{% endunless -%}
 </title>
 
 <link
