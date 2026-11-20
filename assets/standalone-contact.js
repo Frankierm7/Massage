@@ -10,14 +10,11 @@
   const heading = content.querySelector('h1');
   // Mount only the active view; moving its nodes preserves draft input across navigation.
   const nodes = [...content.childNodes];
-  const catalogTitle = document.title;
+  let previousSummary = '';
 
   function enterContact() {
     if (location.hash !== '#contact-us') {
-      if (heading.isConnected) {
-        content.append(...nodes);
-        if (document.title === heading.textContent + ' – Dusk Arbor') document.title = catalogTitle;
-      }
+      if (heading.isConnected) content.append(...nodes);
       return;
     }
     if (!heading.isConnected) view.append(...nodes);
@@ -31,10 +28,20 @@
   if (!form) return;
   document.addEventListener('click', event => {
     const link = event.target.closest('a[data-contact-link]');
-    if (link?.dataset.inquiryContext && !form.elements.message.value.trim()) {
-      form.elements.message.value = link.dataset.inquiryContext;
-      status.hidden = true;
+    const summary = link?.dataset.inquiryContext;
+    if (!summary) return;
+    const field = form.elements.message;
+    if (previousSummary && field.value.includes(previousSummary)) {
+      field.value = field.value.replace(previousSummary, () => summary);
+    } else {
+      const oldLines = new Set(previousSummary.split('\n'));
+      const notes = previousSummary
+        ? field.value.split('\n').filter(line => !oldLines.has(line)).join('\n')
+        : field.value;
+      field.value = notes ? notes + '\n\n' + summary : summary;
     }
+    previousSummary = summary;
+    status.hidden = true;
   });
   form.addEventListener('input', () => { status.hidden = true; });
   form.addEventListener('submit', event => {

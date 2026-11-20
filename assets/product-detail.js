@@ -11,10 +11,8 @@
     if (previous && previous !== next) previous.removeAttribute('data-active');
 
     if (!next) {
-      if (previous) {
-        document.title = originalTitle;
-        if (id === 'chair-guide' || id === 'chair-comparison') candidate?.scrollIntoView();
-      }
+      if (id !== 'contact-us') document.title = originalTitle;
+      if (previous && (id === 'chair-guide' || id === 'chair-comparison')) candidate?.scrollIntoView();
       return;
     }
 
@@ -32,6 +30,15 @@
       next.scrollIntoView({ block: 'start' });
     }
   }
+
+  document.querySelector('.skip')?.addEventListener('click', event => {
+    const heading = active?.querySelector('[data-detail-heading]') ||
+      (location.hash === '#contact-us' && document.querySelector('#contact-us h1'));
+    if (!heading) return;
+    event.preventDefault();
+    heading.focus();
+    heading.scrollIntoView({ block: 'start' });
+  });
 
   function syncLink(card) {
     if (!card) return;

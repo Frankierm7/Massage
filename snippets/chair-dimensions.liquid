@@ -1,9 +1,23 @@
-{% assign facts = chair.metafields.chair %}
+{% assign positions = 'upright,reclined,carton' | split: ',' %}
+{% assign axes = 'depth,width,height' | split: ',' %}
+{% capture rows %}
+  {% for position in positions %}
+    {% assign populated = false %}
+    {% capture cells %}{% for axis in axes %}
+      {% assign key = position | append: '_' | append: axis %}
+      {% capture measurement %}{% render 'chair-spec', chair: chair, key: key %}{% endcapture %}
+      {% if measurement != blank %}{% assign populated = true %}{% endif %}
+      <td>{{ measurement | escape }}</td>
+    {% endfor %}{% endcapture %}
+    {% if populated %}<tr><th scope="row">{{ position | capitalize }}</th>{{ cells }}</tr>{% endif %}
+  {% endfor %}
+{% endcapture %}
+{% assign rows = rows | strip %}
+{% if rows != blank %}
 <table class="dimensions"><caption>{{ 'arbor.chair_and_carton_measurements_in_inches' | t }}</caption>
   <thead><tr><th scope="col">{{ 'arbor.position' | t }}</th><th scope="col">{{ 'arbor.depth' | t }}</th><th scope="col">{{ 'arbor.width' | t }}</th><th scope="col">{{ 'arbor.height' | t }}</th></tr></thead>
-  <tbody>{% assign positions = 'upright,reclined,carton' | split: ',' %}{% assign axes = 'depth,width,height' | split: ',' %}
-  {% for position in positions %}<tr><th scope="row">{{ position | capitalize }}</th>{% for axis in axes %}
-    {% assign key = position | append: '_' | append: axis %}<td>{{ facts[key].value | default: 'Ask us' | escape }}</td>
-  {% endfor %}</tr>{% endfor %}</tbody>
+  <tbody>{{ rows }}</tbody>
 </table>
-{% if facts.weight_lb.value %}<p>Chair weight: {{ facts.weight_lb.value }} lb</p>{% endif %}
+{% endif %}
+{% capture weight %}{% render 'chair-spec', chair: chair, key: 'weight_lb' %}{% endcapture %}
+{% if weight != blank %}<p>Chair weight: {{ weight | escape }} lb</p>{% endif %}

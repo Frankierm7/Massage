@@ -32,33 +32,43 @@
       {% for block in section.blocks %}{% render block %}{% endfor %}
     </div>
   </div>
+  {% capture manual %}{% render 'chair-spec', chair: product, key: 'manual' %}{% endcapture %}
+  {% capture features %}{% render 'chair-spec', chair: product, key: 'features' %}{% endcapture %}
+  {% capture mechanism %}{% render 'chair-spec', chair: product, key: 'mechanism' %}{% endcapture %}
+  {% capture track %}{% render 'chair-spec', chair: product, key: 'track' %}{% endcapture %}
+  {% capture controls %}{% render 'chair-spec', chair: product, key: 'controls' %}{% endcapture %}
+  {% capture programs %}{% render 'chair-spec', chair: product, key: 'programs' %}{% endcapture %}
+  {% capture positions %}{% render 'chair-spec', chair: product, key: 'positions' %}{% endcapture %}
+  {% capture power_w %}{% render 'chair-spec', chair: product, key: 'power_w' %}{% endcapture %}
+  {% capture supply %}{% render 'chair-spec', chair: product, key: 'supply' %}{% endcapture %}
   <div class="product-detail" id="fit"><div><h2>{{ 'arbor.fit_in_your_room' | t }}</h2><p>{{ 'arbor.allow_space_behind_the_chair_to_recline_measure' | t }}</p>
     {% if settings.fit_page != blank %}<a class="under" href="{{ settings.fit_page.url }}">{{ 'arbor.fit_delivery_guide' | t }}</a>{% endif %}</div>
-    <div>{% render 'chair-dimensions', chair: product %}{% if facts.manual.value != blank %}<a class="under" href="{{ facts.manual.value | escape }}">{{ 'arbor.read_the_manufacturer_s_manual_pdf' | t }}</a>{% endif %}</div>
+    <div>{% render 'chair-dimensions', chair: product %}{% if manual != blank %}<a class="under" href="{{ manual | escape }}">{{ 'arbor.read_the_manufacturer_s_manual_pdf' | t }}</a>{% endif %}</div>
   </div>
-  {% if facts.features.value != blank %}
+  {% if features != blank or mechanism != blank or track != blank or controls != blank or programs != blank %}
   <div class="control-section">
     <h2>{{ 'arbor.what_the_controls_do' | t }}</h2>
     <div class="control-grid">
-      <article>
+      {% if mechanism != blank or track != blank or features != blank %}<article>
         {% assign track_image = variant.metafields.chair.gallery.value[1] %}
         {% if track_image.preview_image %}{% render 'chair-image', image: track_image.preview_image, label: display_name, sizes: '(min-width: 760px) 40vw, 100vw' %}{% endif %}
         <h3>{{ 'arbor.roller_track' | t }}</h3>
-        <p>{{ facts.mechanism.value | escape }} · {{ facts.track.value | escape }}</p>
-        <ul>{% for feature in facts.features.value %}<li>{{ feature | escape }}</li>{% endfor %}</ul>
-      </article>
-      <article>
+        {% if mechanism != blank or track != blank %}<p>{{ mechanism | escape }}{% if mechanism != blank and track != blank %} · {% endif %}{{ track | escape }}</p>{% endif %}
+        {% if features != blank %}<ul>{{ features }}</ul>{% endif %}
+      </article>{% endif %}
+      {% if controls != blank or programs != blank %}<article>
         {% assign room_image = variant.metafields.chair.gallery.value | first %}
         {% if room_image.preview_image %}{% render 'chair-image', image: room_image.preview_image, label: display_name, sizes: '(min-width: 760px) 40vw, 100vw' %}{% endif %}
         <h3>{{ 'arbor.programs_and_adjustments' | t }}</h3>
-        <p>{{ facts.controls.value | escape }}</p>
-        {% if facts.programs.value %}<p>{{ 'arbor.automatic_program_count' | t: count: facts.programs.value }}</p>{% endif %}
-      </article>
+        {% if controls != blank %}<p>{{ controls | escape }}</p>{% endif %}
+        {% if programs != blank %}<p>{{ 'arbor.automatic_program_count' | t: count: programs }}</p>{% endif %}
+      </article>{% endif %}
     </div>
   </div>
-  <div class="product-detail"><h2>{{ 'arbor.setup_questions' | t }}</h2><div>
-    {% if facts.positions.value != blank %}<details><summary>{{ 'arbor.what_is_a_zero_gravity_position' | t }}</summary><p>{{ 'arbor.recline_count' | t: count: facts.positions.value }}</p></details>{% endif %}
-    {% if facts.power_w.value %}<details><summary>{{ 'arbor.what_power_supply_does_it_use' | t }}</summary><p>{{ facts.power_w.value }} W, {{ facts.supply.value | escape }}.</p></details>{% endif %}
+  {% endif %}
+  {% if positions != blank or power_w != blank or supply != blank %}<div class="product-detail"><h2>{{ 'arbor.setup_questions' | t }}</h2><div>
+    {% if positions != blank %}<details><summary>{{ 'arbor.what_is_a_zero_gravity_position' | t }}</summary><p>{{ 'arbor.recline_count' | t: count: positions }}</p></details>{% endif %}
+    {% if power_w != blank or supply != blank %}<details><summary>{{ 'arbor.what_power_supply_does_it_use' | t }}</summary><p>{% if power_w != blank %}{{ power_w | escape }} W{% endif %}{% if power_w != blank and supply != blank %}, {% endif %}{{ supply | escape }}.</p></details>{% endif %}
     <details><summary>{{ 'arbor.what_should_i_measure_before_delivery' | t }}</summary><p>{{ 'arbor.check_the_carton_width_and_height_against_the' | t }}</p><a href="#fit">{{ 'arbor.see_the_measurements' | t }}</a></details></div></div>{% endif %}
   {% if settings.policy_summary != blank %}<div class="product-detail"><h2>{{ 'arbor.delivery_returns_and_warranty' | t }}</h2><div>{{ settings.policy_summary }}<div class="inline-links">{% render 'policy-links' %}</div></div></div>{% endif %}
   {% if facts.alternative.value != blank or settings.compare_page != blank %}<div class="product-detail"><h2>{{ 'arbor.compare_your_options' | t }}</h2><div>

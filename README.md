@@ -24,6 +24,8 @@ The base is Shopify’s JSON-template Skeleton revision `a4f32d393b9eadf6c440331
 
 ## Product data
 
+The theme includes manufacturer specifications for Alder, Linden and Sequoia. It uses the matching Shopify metafield when you supply a value and omits unknown specifications. Alder’s weight is omitted because the manufacturer lists conflicting figures.
+
 Use the product metafield namespace `chair` throughout. The same definitions drive the product, comparison and fit pages.
 
 | Keys | Shopify type and unit |

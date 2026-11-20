@@ -3,6 +3,10 @@
 <section class="wrap slab" id="chair-guide"><div class="section-head"><h2>{{ section.settings.heading | escape }}</h2><a class="under" href="{{ lineup.url }}">{{ 'arbor.view_all_chairs' | t }}</a></div>
   <div class="cards">{% for chair in lineup.products limit: 3 %}{% render 'chair-card', chair: chair %}{% endfor %}</div>
 </section>
+{% assign store_lineup = settings.chairs | default: collections['massage-chairs'] %}
+{% unless store_lineup.products_count > 0 %}
+  {% render 'native-comparison', chairs: lineup.products, comparison_id: 'chair-comparison' %}
+{% endunless %}
 {% elsif section.blocks.size > 0 %}
 <section id="chair-guide" class="wrap slab reference-guide">
   <div class="section-head"><h2>{{ section.settings.heading | escape }}</h2></div>
