@@ -189,3 +189,32 @@ img, br { flex-shrink: 0; }
 .control-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: var(--gap); }
 .control-grid img { width: 100%; margin-block: 16px 24px; }
 @media (max-width: 759px) { .control-grid { grid-template-columns: 1fr; } }
+
+.hero-photo figcaption .guide-caption { display: block; padding: 8px 14px; color: var(--ink); }
+.reference-guide { border-top: 1px solid var(--line); }
+.reference-guide .section-head { margin-bottom: 8px; }
+.guide-note { color: var(--ash); margin-bottom: 32px; }
+.guide-card { min-width: 0; scroll-margin-top: 24px; }
+.guide-photos { border: 1px solid var(--line); }
+.guide-identity { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin: 20px 0 8px; }
+.guide-identity h3, .guide-identity p { margin: 0; }
+.guide-price { font-size: 18px; font-variant-numeric: tabular-nums; }
+.guide-price span { color: var(--ash); font-size: 12px; }
+.guide-finish { padding: 0; border: 0; margin: 14px 0; }
+.guide-finish legend { color: var(--ash); font-size: 14px; padding: 0; }
+.guide-finish label { display: inline-flex; align-items: center; min-height: 44px; gap: 7px; margin-right: 12px; cursor: pointer; }
+.guide-finish input { position: absolute; width: 1px; min-height: 0; height: 1px; clip-path: inset(50%); overflow: hidden; }
+.guide-finish .swatch { display: inline-block; width: 18px; height: 18px; border-radius: 50%; border: 1px solid var(--ash); }
+.guide-finish .swatch-khaki { background: #c6b499; }
+.guide-finish .swatch-black { background: #272723; }
+.guide-finish .swatch-brown { background: #755543; }
+.guide-finish input:checked + .swatch { outline: 1px solid var(--ink); outline-offset: 2px; }
+.guide-finish label:has(input:focus-visible) { outline: 3px solid var(--moss); outline-offset: 3px; }
+.guide-card [data-finish="2"], .guide-card:has(input[value="2"]:checked) [data-finish="1"] { display: none; }
+.guide-card:has(input[value="2"]:checked) img[data-finish="2"] { display: block; }
+.guide-card:has(input[value="2"]:checked) a[data-finish="2"] { display: inline-flex; }
+.guide-specs { border-top: 1px solid var(--line); }
+.guide-specs img { width: 100%; }
+.guide-specs ul { padding-left: 20px; }
+.guide-specs td, .guide-specs th { padding: 8px 4px; }
+.guide-source { gap: 8px; }

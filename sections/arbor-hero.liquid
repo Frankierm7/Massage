@@ -4,10 +4,18 @@
   assign room = finish.metafields.chair.gallery.value | first
   assign photo = section.settings.image | default: room.preview_image
   assign lineup = settings.chairs | default: collections['massage-chairs']
-  assign browse = section.settings.browse | default: lineup.url
+  assign browse = section.settings.browse
+  if browse == blank and lineup.products_count > 0
+    assign browse = lineup.url
+  endif
+  assign browse = browse | default: '#chair-guide'
   assign compare = section.settings.compare | default: settings.compare_page.url
+  assign guide_photo = false
+  if photo == blank and section.settings.chair == blank
+    assign guide_photo = true
+  endif
 %}
-<section class="hero wrap{% unless photo %} text-hero{% endunless %}">
+<section class="hero wrap{% unless photo or guide_photo %} text-hero{% endunless %}">
   <div class="hero-copy">
     <h1>{% if section.settings.heading == 'A quieter evening.' %}{{ 'arbor.a_quieter' | t }} <br><em>{{ 'arbor.evening' | t }}</em>{% else %}{{ section.settings.heading | escape }}{% endif %}</h1>
     <p>{% if lineup.products_count == 3 %}Explore three Real Relax massage chairs, selected for how they feel and how they fit your home.{% else %}Explore Real Relax massage chairs, selected for how they feel and how they fit your home.{% endif %}</p>
@@ -16,7 +24,16 @@
   </div>
   {% if photo %}<figure class="hero-photo">{% render 'chair-image', image: photo, label: chair.title, eager: true, sizes: '(min-width: 760px) 56vw, 100vw' %}
     {% if finish and section.settings.image == blank %}<figcaption><a href="{{ finish.url }}">{{ chair.metafields.chair.model.value | default: chair.title | escape }} <span> / </span> {{ finish.option1 | escape }}</a></figcaption>{% endif %}
-  </figure>{% elsif request.design_mode %}<p>{{ 'arbor.choose_the_lead_photograph_or_assign_the_khaki' | t }}</p>{% endif %}
+  </figure>
+  {% elsif guide_photo %}
+    <figure class="hero-photo">
+      <img src="{{ 'guide-ps5200-khaki-lifestyle-1280.webp' | asset_url }}"
+           srcset="{{ 'guide-ps5200-khaki-lifestyle-720.webp' | asset_url }} 720w, {{ 'guide-ps5200-khaki-lifestyle-1280.webp' | asset_url }} 1280w"
+           sizes="(min-width: 760px) 56vw, 100vw" width="1280" height="1280" fetchpriority="high"
+           alt="Khaki Real Relax PS5200 massage chair in a furnished living room">
+      <figcaption><span class="guide-caption">PS5200 / Khaki</span></figcaption>
+    </figure>
+  {% elsif request.design_mode %}<p>{{ 'arbor.choose_the_lead_photograph_or_assign_the_khaki' | t }}</p>{% endif %}
 </section>
 
 {% schema %}

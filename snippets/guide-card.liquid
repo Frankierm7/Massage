@@ -1,0 +1,61 @@
+{% liquid
+  assign item = block.settings
+  assign key = item.model | downcase
+  assign stem = 'guide-' | append: key | append: '-'
+  assign colors = 'Khaki,Black' | split: ','
+  if key == 'ps6500'
+    assign colors = 'Black,Brown' | split: ','
+  endif
+%}
+<article class="guide-card" id="chair-{{ key | escape }}" {{ block.shopify_attributes }}>
+  <div class="studio guide-photos">
+    {% for finish in colors %}
+      {% assign n = forloop.index %}
+      {% assign color = finish | downcase %}
+      {% assign image_name = stem | append: color | append: '-studio-' %}
+      <img data-finish="{{ n }}" src="{{ image_name | append: '760.webp' | asset_url }}"
+           srcset="{{ image_name | append: '380.webp' | asset_url }} 380w, {{ image_name | append: '760.webp' | asset_url }} 760w"
+           sizes="(min-width: 880px) 32vw, (min-width: 480px) 46vw, 90vw"
+           width="760" height="760" loading="lazy" alt="Real Relax {{ item.model | escape }} in {{ color | escape }}, three-quarter studio view">
+    {% endfor %}
+  </div>
+  <div class="guide-identity">
+    <h3>{{ item.model | escape }}</h3>
+    {% if item.price != blank %}<p class="guide-price">{{ item.price | escape }} <span>USD</span></p>{% endif %}
+  </div>
+  <fieldset class="guide-finish"><legend>Finish</legend>
+    {% for finish in colors %}
+      {% assign n = forloop.index %}
+      <label>
+        <input type="radio" name="finish-{{ section_id }}-{{ block.id }}" value="{{ n }}" {% if forloop.first %}checked{% endif %}>
+        <span class="swatch swatch-{{ finish | downcase | escape }}" aria-hidden="true"></span>
+        {{ finish | escape }}
+      </label>
+    {% endfor %}
+  </fieldset>
+  <p>{{ item.overview | escape }}</p>
+  <details class="guide-specs">
+    <summary>Features &amp; measurements</summary>
+    {% for finish in colors %}
+      {% assign n = forloop.index %}
+      {% assign color = finish | downcase %}
+      {% assign image_name = stem | append: color | append: '-lifestyle-720.webp' %}
+      <img data-finish="{{ n }}" src="{{ image_name | asset_url }}" width="720" height="720" loading="lazy"
+           alt="Real Relax {{ item.model | escape }} in {{ color | escape }} in a furnished room">
+    {% endfor %}
+    {% assign features = item.features | newline_to_br | split: '<br />' %}
+    <ul>{% for feature in features %}<li>{{ feature | strip | escape }}</li>{% endfor %}</ul>
+    <table><caption>Depth × width × height</caption><tbody>
+      <tr><th scope="row">Upright</th><td>{{ item.upright | escape }}</td></tr>
+      <tr><th scope="row">Reclined</th><td>{{ item.reclined | escape }}</td></tr>
+      <tr><th scope="row">Carton</th><td>{{ item.carton | escape }}</td></tr>
+      {% if item.weight != blank %}<tr><th scope="row">Chair weight</th><td>{{ item.weight | escape }}</td></tr>{% endif %}
+    </tbody></table>
+    {% if item.manual != blank %}<a class="under" href="{{ item.manual | escape }}">Manufacturer’s manual (PDF)</a>{% endif %}
+  </details>
+  {% for finish in colors %}
+      {% assign n = forloop.index %}
+    {% assign link_key = 'url_' | append: n %}
+    {% if item[link_key] != blank %}<a class="under guide-source" data-finish="{{ n }}" href="{{ item[link_key] | escape }}">View at Real Relax</a>{% endif %}
+  {% endfor %}
+</article>

@@ -1,7 +1,23 @@
 {% assign lineup = section.settings.collection | default: settings.chairs | default: collections['massage-chairs'] %}
 {% if lineup.products.size > 0 %}
-<section class="wrap slab"><div class="section-head"><h2>{{ section.settings.heading | escape }}</h2><a class="under" href="{{ lineup.url }}">{{ 'arbor.view_all_chairs' | t }}</a></div>
+<section class="wrap slab" id="chair-guide"><div class="section-head"><h2>{{ section.settings.heading | escape }}</h2><a class="under" href="{{ lineup.url }}">{{ 'arbor.view_all_chairs' | t }}</a></div>
   <div class="cards">{% for chair in lineup.products limit: 3 %}{% render 'chair-card', chair: chair %}{% endfor %}</div>
+</section>
+{% elsif section.blocks.size > 0 %}
+<section id="chair-guide" class="wrap slab reference-guide">
+  <div class="section-head"><h2>{{ section.settings.heading | escape }}</h2></div>
+  <p class="guide-note">Real Relax manufacturer prices in USD{% if section.settings.price_date != blank %}, recorded {{ section.settings.price_date | escape }}{% endif %}.</p>
+  <div class="cards">
+    {% for block in section.blocks %}
+      {% assign handle = block.settings.model | downcase | prepend: 'real-relax-' %}
+      {% assign native_chair = all_products[handle] %}
+      {% if native_chair != blank %}
+        <div id="chair-{{ block.settings.model | downcase | escape }}" {{ block.shopify_attributes }}>{% render 'chair-card', chair: native_chair %}</div>
+      {% else %}
+        {% render 'guide-card', block: block, section_id: section.id %}
+      {% endif %}
+    {% endfor %}
+  </div>
 </section>
 {% elsif request.design_mode %}<p class="wrap">{{ 'arbor.select_a_collection_with_visible_products_for_the' | t }}</p>{% endif %}
 
@@ -19,11 +35,96 @@
       "type": "collection",
       "id": "collection",
       "label": "Collection"
+    },
+    {
+      "type": "text",
+      "id": "price_date",
+      "label": "Manufacturer price observation date",
+      "default": "November 19, 2026"
     }
   ],
   "presets": [
     {
       "name": "Chair collection"
+    }
+  ],
+  "max_blocks": 3,
+  "blocks": [
+    {
+      "type": "reference",
+      "name": "Manufacturer chair guide",
+      "settings": [
+        {
+          "type": "select",
+          "id": "model",
+          "label": "Model",
+          "options": [
+            {
+              "value": "Favor-27",
+              "label": "Favor-27"
+            },
+            {
+              "value": "PS5200",
+              "label": "PS5200"
+            },
+            {
+              "value": "PS6500",
+              "label": "PS6500"
+            }
+          ],
+          "default": "Favor-27"
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Manufacturer price in USD"
+        },
+        {
+          "type": "textarea",
+          "id": "overview",
+          "label": "Overview"
+        },
+        {
+          "type": "textarea",
+          "id": "features",
+          "label": "Features, one per line"
+        },
+        {
+          "type": "text",
+          "id": "upright",
+          "label": "Upright dimensions"
+        },
+        {
+          "type": "text",
+          "id": "reclined",
+          "label": "Reclined dimensions"
+        },
+        {
+          "type": "text",
+          "id": "carton",
+          "label": "Carton dimensions"
+        },
+        {
+          "type": "text",
+          "id": "weight",
+          "label": "Confirmed chair weight"
+        },
+        {
+          "type": "url",
+          "id": "manual",
+          "label": "Manufacturer manual"
+        },
+        {
+          "type": "url",
+          "id": "url_1",
+          "label": "Khaki listing (PS6500 Black)"
+        },
+        {
+          "type": "url",
+          "id": "url_2",
+          "label": "Black listing (PS6500 Brown)"
+        }
+      ]
     }
   ]
 }

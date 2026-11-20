@@ -6,7 +6,61 @@
     },
     "lineup": {
       "type": "arbor-lineup",
-      "settings": {}
+      "settings": {},
+      "blocks": {
+        "guide_favor_27": {
+          "type": "reference",
+          "settings": {
+            "model": "Favor-27",
+            "overview": "Choose a program on the seven-inch screen, then settle into one of two recline positions. The rollers follow an SL track from neck to hips. Of the three chairs in this edit, the Favor-27 takes up the least depth when fully reclined.",
+            "price": "$1,149.99",
+            "features": "3D rollers on an SL track\n16 automatic programs\nTwo zero-gravity positions\n7-inch touchscreen\nLumbar heat\n26 air cells\nFoot rollers and extendable footrest\nBluetooth audio and USB charging",
+            "upright": "57.1 × 29.1 × 42.1 in",
+            "reclined": "66.1 × 29.1 × 35.4 in",
+            "carton": "46.5 × 29.5 × 43.7 in",
+            "manual": "https://cdn.shopify.com/s/files/1/0665/9493/0917/files/real_relax_Favor-27_user_manual.pdf?v=1789122158",
+            "url_1": "https://realrelaxmall.com/products/favor-27-massage-chair-khaki",
+            "url_2": "https://realrelaxmall.com/products/favor-27-massage-chair-black"
+          }
+        },
+        "guide_ps5200": {
+          "type": "reference",
+          "settings": {
+            "model": "PS5200",
+            "overview": "The PS5200 gives you separate control over roller intensity and air pressure, each with five settings. Choose from 20 automatic programs, add lower-back warmth, or use the foot rollers while you recline.",
+            "price": "$1,599.99",
+            "features": "4D rollers on an SL track\n20 automatic programs\nTwo zero-gravity positions\nFive roller intensity levels and five air pressure levels\n30 air cells\nShoulder detection\nLumbar heat and foot rollers\nTouch controls and wireless charging",
+            "upright": "57.5 × 29.1 × 44.5 in",
+            "reclined": "70.1 × 29.1 × 38.6 in",
+            "carton": "50.4 × 29.9 × 47.2 in",
+            "manual": "https://cdn.shopify.com/s/files/1/0665/9493/0917/files/real_relax_PS5200_user_manual.pdf?v=1755509321",
+            "weight": "174.2 lb",
+            "url_1": "https://realrelaxmall.com/products/ps5200-massage-chair-khaki",
+            "url_2": "https://realrelaxmall.com/products/ps5200-massage-chair-black"
+          }
+        },
+        "guide_ps6500": {
+          "type": "reference",
+          "settings": {
+            "model": "PS6500",
+            "overview": "The PS6500 pairs a long 4D roller track with three recline positions. Save a favorite routine, change supported settings by voice, and choose from 25 ambient sounds. Allow 74.02 inches for the reclined chair itself, plus the clearance required for placement.",
+            "price": "$2,299.99",
+            "features": "4D rollers on a long SL track\n27 automatic programs\nThree zero-gravity positions\n7-inch touchscreen and voice control\nFavorite settings\n28 air cells\nLumbar heat and foot rollers\n25 ambient sounds\nBluetooth audio and wireless charging",
+            "upright": "61.81 × 30.71 × 48.82 in",
+            "reclined": "74.02 × 30.71 × 38.98 in",
+            "carton": "58.46 × 31.89 × 50.2 in",
+            "manual": "https://cdn.shopify.com/s/files/1/0023/2525/0115/files/PS6500__20230516-__compressed.pdf?v=1760938058",
+            "weight": "205 lb",
+            "url_1": "https://realrelaxmall.com/products/ps6500-4d-massage-chair-black",
+            "url_2": "https://realrelaxmall.com/products/real-relax%C2%AE-ps6500-massage-chair"
+          }
+        }
+      },
+      "block_order": [
+        "guide_favor_27",
+        "guide_ps5200",
+        "guide_ps6500"
+      ]
     },
     "compare": {
       "type": "arbor-compare",

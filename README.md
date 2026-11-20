@@ -2,6 +2,12 @@
 
 An Online Store 2.0 theme for an independent Real Relax retailer. The Shopify theme lives at the repository root. Shopify owns catalog records, media, variant pricing, inventory, cart totals and checkout.
 
+## Open the chair catalog
+
+Open [index.html](index.html) from a downloaded checkout to browse the three chairs, switch finishes and read their specifications. Keep the adjacent assets directory with the page. This standalone edition captures the theme's catalog view for review in a browser.
+
+The homepage also includes this guide when the Shopify collection has no visible products. Prices in the guide are dated Real Relax manufacturer listings in USD. The native collection and product templates use Shopify prices and availability when the merchant adds products.
+
 ## Review
 
 Run `shopify theme check` from this directory. With an authorized test store, run `shopify theme dev --store <development-store>.myshopify.com`. Use that development preview to test the editor and native forms. The theme requires no asset build. To create an uploadable theme archive, run `shopify theme package`.

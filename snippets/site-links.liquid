@@ -2,7 +2,7 @@
   {% for link in menu.links %}<a href="{{ link.url }}" {% if link.current %}aria-current="page"{% endif %}>{{ link.title | escape }}</a>{% endfor %}
 {% else %}
   {% assign chairs = settings.chairs | default: collections['massage-chairs'] %}
-  {% if chairs != blank %}<a href="{{ chairs.url }}">{{ 'arbor.chairs' | t }}</a>{% endif %}
+  {% if chairs != blank and chairs.products_count > 0 %}<a href="{{ chairs.url }}">{{ 'arbor.chairs' | t }}</a>{% else %}<a href="{{ routes.root_url }}#chair-guide">{{ 'arbor.chairs' | t }}</a>{% endif %}
   {% if settings.compare_page != blank %}<a href="{{ settings.compare_page.url }}">{{ 'arbor.compare' | t }}</a>{% endif %}
   {% if settings.about_page != blank %}<a href="{{ settings.about_page.url }}">{{ 'arbor.about' | t }}</a>{% endif %}
 {% endif %}
