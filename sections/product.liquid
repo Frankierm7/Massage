@@ -10,7 +10,27 @@
     </div>
     {% render 'variant-gallery', variant: variant, chair: product %}
     <div class="buy">
-      {% render 'chair-copy', text: product.description %}
+      {% case product.handle %}
+        {% when 'real-relax-favor-27', 'alder', 'alder-massage-chair' %}
+          <p class="product-lead">A compact recline with a full range of massage options.</p>
+        {% when 'real-relax-ps5200', 'linden', 'linden-massage-chair' %}
+          <p class="product-lead">Fine-tune your massage with separate roller and air-pressure controls.</p>
+        {% when 'real-relax-ps6500', 'sequoia', 'sequoia-massage-chair' %}
+          <p class="product-lead">A long roller track, voice controls, and room to settle in.</p>
+      {% endcase %}
+      <div class="product-intro">
+        {% render 'chair-copy', text: product.description %}
+      </div>
+      {% capture programs_summary %}{% render 'chair-spec', chair: product, key: 'programs' %}{% endcapture %}
+      {% capture track_summary %}{% render 'chair-spec', chair: product, key: 'mechanism' %}{% endcapture %}
+      {% capture depth_summary %}{% render 'chair-spec', chair: product, key: 'reclined_depth' %}{% endcapture %}
+      {% if programs_summary != blank or track_summary != blank or depth_summary != blank %}
+        <ul class="product-highlights" aria-label="Chair highlights">
+          {% if programs_summary != blank %}<li><strong>{{ programs_summary | escape }}</strong><span>automatic programs</span></li>{% endif %}
+          {% if track_summary != blank %}<li><strong>{{ track_summary | escape }}</strong><span>massage rollers</span></li>{% endif %}
+          {% if depth_summary != blank %}<li><strong>{{ depth_summary | escape }} in</strong><span>reclined depth</span></li>{% endif %}
+        </ul>
+      {% endif %}
       <p class="retailer">{{ 'arbor.sold_by_dusk_arbor_an_authorized_real_relax' | t }}</p>
       <fieldset><legend>{{ 'arbor.finish' | t }} <strong>{{ variant.option1 | escape }}</strong></legend>
         <div class="finishes">{% for choice in product.variants %}
@@ -47,7 +67,7 @@
   </div>
   {% if features != blank or mechanism != blank or track != blank or controls != blank or programs != blank %}
   <div class="control-section">
-    <h2>{{ 'arbor.what_the_controls_do' | t }}</h2>
+    <h2>Explore the massage</h2>
     <div class="control-grid">
       {% if mechanism != blank or track != blank or features != blank %}<article>
         {% assign track_image = variant.metafields.chair.gallery.value[1] %}

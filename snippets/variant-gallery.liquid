@@ -1,11 +1,13 @@
 {% assign hero = variant.featured_image %}
 {% assign gallery = variant.metafields.chair.gallery.value %}
+{% capture stem %}{% render 'catalog-photo-stem', chair: chair, variant: variant %}{% endcapture %}
+{% if stem != blank %}
+  {% capture model_name %}{% render 'chair-name', chair: chair, plain: true %}{% endcapture %}
+  {% assign label = model_name | strip | append: ' in ' | append: variant.option1 %}
+{% endif %}
 {% if gallery == blank %}
-  {% capture stem %}{% render 'catalog-photo-stem', chair: chair, variant: variant %}{% endcapture %}
   {% if stem != blank %}
     {% assign studio = stem | append: '-studio-760.webp' %}
-    {% capture model_name %}{% render 'chair-name', chair: chair, plain: true %}{% endcapture %}
-    {% assign label = model_name | strip | append: ' in ' | append: variant.option1 %}
   {% elsif hero == blank %}
     {% assign gallery = chair.images %}
   {% endif %}
@@ -23,7 +25,7 @@
       {% endif %}
       <span class="zoom-mark" aria-hidden="true">＋</span>
     </a>
-    {% if gallery != blank or studio %}<div class="thumbs" aria-label="{{ 'arbor.photographs' | t | escape }}">
+    {% if gallery != blank or stem != blank %}<div class="thumbs" aria-label="{{ 'arbor.photographs' | t | escape }}">
       {% if hero %}{% render 'gallery-thumb', photo: hero, active: true, label: variant.title %}{% endif %}
       {% if studio and hero == blank %}{% render 'catalog-gallery-thumb', filename: studio, width: 760, description: label, active: true %}{% endif %}
       {% for media in gallery %}{% assign image = media.preview_image | default: media %}{% if image %}
@@ -37,6 +39,14 @@
         {% assign track_alt = label | append: ', roller-track illustration' %}
         {% render 'catalog-gallery-thumb', filename: room, width: 720, description: room_alt %}
         {% render 'catalog-gallery-thumb', filename: track, width: 900, description: track_alt %}
+      {% endif %}
+      {% if stem != blank %}
+        {% assign extra_views = 'programs,recline,details' | split: ',' %}
+        {% for view in extra_views %}
+          {% assign filename = stem | append: '-' | append: view | append: '-1000.webp' %}
+          {% assign description = label | append: ', ' | append: view %}
+          {% render 'catalog-gallery-thumb', filename: filename, width: 1000, description: description %}
+        {% endfor %}
       {% endif %}
     </div>{% endif %}
     <dialog aria-label="{{ 'arbor.enlarged_chair_photograph' | t | escape }}"><button type="button" data-close>{{ 'arbor.close' | t }}</button><div data-zoom></div></dialog>
