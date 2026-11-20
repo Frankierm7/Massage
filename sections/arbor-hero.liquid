@@ -29,8 +29,8 @@
 %}
 <section class="hero wrap{% unless photo or guide_photo %} text-hero{% endunless %}">
   <div class="hero-copy">
-    <h1>{% if section.settings.heading == 'A quieter evening.' %}{{ 'arbor.a_quieter' | t }} <br><em>{{ 'arbor.evening' | t }}</em>{% else %}{{ section.settings.heading | escape }}{% endif %}</h1>
-    <p>{% if lineup.products_count == 3 %}Explore three Real Relax massage chairs, selected for how they feel and how they fit your home.{% else %}Explore Real Relax massage chairs, selected for how they feel and how they fit your home.{% endif %}</p>
+    <h1>{% if section.settings.heading == 'A quieter evening.' %}Massage chairs <br><em>for home.</em>{% else %}{{ section.settings.heading | escape }}{% endif %}</h1>
+    <p>Explore Real Relax massage chairs, selected for their features and how they fit your home.</p>
     <div class="actions">{% if browse != blank %}<a class="button" href="{{ browse }}">{{ 'arbor.explore_the_chairs' | t }} <span aria-hidden="true">→</span></a>{% endif %}
       {% if compare != blank %}<a class="under" href="{{ compare }}">{{ 'arbor.compare_chairs' | t }}</a>{% endif %}</div>
   </div>
