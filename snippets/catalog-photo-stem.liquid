@@ -1,0 +1,21 @@
+{%- liquid
+  assign model = chair.handle
+  assign finish = variant.option1 | strip | downcase
+  case model
+    when 'real-relax-favor-27', 'alder', 'alder-massage-chair'
+      assign model = 'favor-27'
+    when 'real-relax-ps5200', 'linden', 'linden-massage-chair'
+      assign model = 'ps5200'
+    when 'real-relax-ps6500', 'sequoia', 'sequoia-massage-chair'
+      assign model = 'ps6500'
+    else
+      assign model = ''
+  endcase
+  if model != blank
+    if finish == 'black' or model == 'ps6500' and finish == 'brown'
+      echo 'guide-' | append: model | append: '-' | append: finish
+    elsif finish == 'khaki' and model != 'ps6500'
+      echo 'guide-' | append: model | append: '-' | append: finish
+    endif
+  endif
+-%}

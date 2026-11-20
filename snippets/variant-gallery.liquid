@@ -1,42 +1,38 @@
 {% assign hero = variant.featured_image %}
 {% assign gallery = variant.metafields.chair.gallery.value %}
-{% liquid
-  assign use_catalog_photos = false
-  if hero and gallery == blank
-    assign key = chair.handle | remove_first: 'real-relax-'
-    assign color = variant.option1 | downcase
-    case chair.handle
-      when 'real-relax-favor-27', 'real-relax-ps5200'
-        if color == 'khaki' or color == 'black'
-          assign use_catalog_photos = true
-        endif
-      when 'real-relax-ps6500'
-        if color == 'black' or color == 'brown'
-          assign use_catalog_photos = true
-        endif
-    endcase
-  endif
-%}
-{% if hero or gallery != blank %}
+{% if gallery == blank %}
+  {% capture stem %}{% render 'catalog-photo-stem', chair: chair, variant: variant %}{% endcapture %}
+  {% if stem != blank %}
+    {% assign studio = stem | append: '-studio-760.webp' %}
+    {% capture model_name %}{% render 'chair-name', chair: chair, plain: true %}{% endcapture %}
+    {% assign label = model_name | strip | append: ' in ' | append: variant.option1 %}
+  {% elsif hero == blank %}
+    {% assign gallery = chair.images %}
+  {% endif %}
+{% endif %}
+{% if hero or gallery != blank or studio %}
   {% assign first = gallery | first %}
-  {% assign primary = hero | default: first.preview_image %}
+  {% assign primary = hero | default: first.preview_image | default: first %}
   <div class="gallery" data-gallery>
-    <a class="gallery-main studio" href="{{ primary | image_url: width: 2000 }}" aria-label="Enlarge {{ variant.title | escape }} photograph">
-      {% render 'chair-image', image: primary, label: variant.title, sizes: '(min-width: 760px) 55vw, 100vw', eager: true %}
+    {% if primary %}{% assign full_url = primary | image_url: width: 2000 %}{% else %}{% assign full_url = studio | asset_url %}{% endif %}
+    <a class="gallery-main studio" href="{{ full_url | escape }}" aria-label="Enlarge {{ variant.title | escape }} photograph">
+      {% if primary %}
+        {% render 'chair-image', image: primary, label: variant.title, sizes: '(min-width: 760px) 55vw, 100vw', eager: true %}
+      {% else %}
+        <img src="{{ studio | asset_url }}" width="760" height="760" alt="{{ label | escape }}, studio view" fetchpriority="high">
+      {% endif %}
       <span class="zoom-mark" aria-hidden="true">＋</span>
     </a>
-    {% if gallery != blank or use_catalog_photos %}<div class="thumbs" aria-label="{{ 'arbor.photographs' | t | escape }}">
+    {% if gallery != blank or studio %}<div class="thumbs" aria-label="{{ 'arbor.photographs' | t | escape }}">
       {% if hero %}{% render 'gallery-thumb', photo: hero, active: true, label: variant.title %}{% endif %}
-      {% for media in gallery %}{% if media.preview_image %}
+      {% if studio and hero == blank %}{% render 'catalog-gallery-thumb', filename: studio, width: 760, description: label, active: true %}{% endif %}
+      {% for media in gallery %}{% assign image = media.preview_image | default: media %}{% if image %}
         {% assign active = false %}{% if hero == blank and forloop.first %}{% assign active = true %}{% endif %}
-        {% render 'gallery-thumb', photo: media.preview_image, active: active, label: variant.title %}
+        {% render 'gallery-thumb', photo: image, active: active, label: variant.title %}
       {% endif %}{% endfor %}
-      {% if use_catalog_photos %}
-        {% capture model_name %}{% render 'chair-name', chair: chair %}{% endcapture %}
-        {% assign stem = 'guide-' | append: key | append: '-' | append: color %}
+      {% if studio %}
         {% assign room = stem | append: '-lifestyle-720.webp' %}
         {% assign track = stem | append: '-track-900.webp' %}
-        {% assign label = model_name | strip | append: ' in ' | append: variant.option1 %}
         {% assign room_alt = label | append: ', in a furnished room' %}
         {% assign track_alt = label | append: ', roller-track illustration' %}
         {% render 'catalog-gallery-thumb', filename: room, width: 720, description: room_alt %}

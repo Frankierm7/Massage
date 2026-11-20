@@ -5,6 +5,11 @@
     {% assign photo = chair.selected_or_first_available_variant.featured_image | default: chair.featured_image %}
     {% if photo %}
       <div class="studio">{% render 'chair-image', image: photo, label: branded_name, sizes: '(min-width: 880px) 32vw, (min-width: 480px) 46vw, 90vw' %}</div>
+    {% else %}
+      {% capture stem %}{% render 'catalog-photo-stem', chair: chair, variant: chair.selected_or_first_available_variant %}{% endcapture %}
+      {% if stem != blank %}
+        <div class="studio"><img src="{{ stem | append: '-studio-760.webp' | asset_url }}" width="760" height="760" loading="lazy" alt="{{ branded_name | escape }} in {{ chair.selected_or_first_available_variant.option1 | escape }}"></div>
+      {% endif %}
     {% endif %}
     <div class="card-heading">
         {% if collection_heading %}<h2>{{ branded_name | escape }}</h2>{% else %}<h3>{{ branded_name | escape }}</h3>{% endif %}
